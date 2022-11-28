@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 public class Application implements Consumer<Event> {
     /**
-     * Одно приложение
+     * окно приложение
      */
     private final Window window;
     public Application() {
@@ -17,7 +17,7 @@ public class Application implements Consumer<Event> {
     }
 
     /**
-     * обработчик событий
+     * Обработчик событий
      * @param e the input argument
      */
     @Override
