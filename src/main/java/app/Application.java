@@ -18,6 +18,7 @@ public class Application implements Consumer<Event> {
             App.terminate();
         }else if (e instanceof EventWindowCloseRequest) {
             window.close();
+
         }
     }
 }
