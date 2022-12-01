@@ -19,9 +19,19 @@ public class Application implements Consumer<Event> {
     public Application() {
         // создаём окно
         window = App.makeWindow();
+        window.setTitle("Java 2D");
         // задаём обработчиком событий текущий объект
         window.setEventListener(this);
         // делаем окно видимым
+        // задаём размер окна
+        window.setWindowSize(900, 900);
+// задаём его положение
+        window.setWindowPosition(100, 100);
+        // задаём иконку
+        switch (Platform.CURRENT) {
+            case WINDOWS -> window.setIcon(new File("src/main/resources/windows.ico"));
+            case MACOS -> window.setIcon(new File("src/main/resources/macos.icns"));
+        }
         window.setVisible(true);
     }
 
