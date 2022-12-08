@@ -2,7 +2,12 @@ package app;
 
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.jwm.skija.EventFrameSkija;
+import io.github.humbleui.skija.Canvas;
+import io.github.humbleui.skija.Paint;
+import io.github.humbleui.skija.RRect;
 import io.github.humbleui.skija.Surface;
+import misc.CoordinateSystem2i;
+import misc.Misc;
 
 import java.io.File;
 import java.util.function.Consumer;
@@ -73,13 +78,34 @@ public class Application implements Consumer<Event> {
             App.terminate();
         } else if (e instanceof EventWindowCloseRequest) {
             window.close();
-        }
-        else if (e instanceof EventFrameSkija ee) {
-            // получаем поверхность рисования
+        } else if (e instanceof EventFrameSkija ee) {
             Surface s = ee.getSurface();
-            // очищаем её канвас заданным цветом
-            s.getCanvas().clear(APP_BACKGROUND_COLOR);
-
+            paint(s.getCanvas(), new CoordinateSystem2i(
+                    s.getWidth() / 3, s.getHeight() / 3,
+                    s.getWidth() / 3,  s.getHeight() / 3));
         }
+    }
+
+
+
+    /**
+     * Рисование
+     *
+     * @param canvas   низкоуровневый инструмент рисования примитивов от Skija
+     * @param windowCS СК окна
+     */
+    public void paint(Canvas canvas, CoordinateSystem2i windowCS) {
+        // запоминаем изменения (пока что там просто заливка цветом)
+        canvas.save();
+        // очищаем канвас
+        canvas.clear(APP_BACKGROUND_COLOR);
+        // создаём кисть
+        Paint paint = new Paint();
+        // задаём цвет рисования
+        paint.setColor(Misc.getColor(100, 255, 255, 255));
+        // рисуем квадрат
+        canvas.drawRRect(windowCS.getRRect(4), paint);
+        // восстанавливаем состояние канваса
+        canvas.restore();
     }
 }
