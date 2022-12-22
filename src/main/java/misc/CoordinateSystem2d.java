@@ -219,4 +219,5 @@ public class CoordinateSystem2d {
         result = 31 * result + (min != null ? min.hashCode() : 0);
         return result;
     }
+
 }
