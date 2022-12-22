@@ -25,6 +25,14 @@ public class Application implements Consumer<Event> {
      */
     private final Label label;
     /**
+     * Первый заголовок
+     */
+    private final Label label2;
+    /**
+     * Первый заголовок
+     */
+    private final Label label3;
+    /**
      * отступы панелей
      */
     public static final int PANEL_PADDING = 5;
@@ -74,7 +82,17 @@ public class Application implements Consumer<Event> {
         }
         // создаём первый заголовок
         label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                "Привет, мир!", true, true);
+                4, 4, 1, 1, 1, 1, "Привет, мир!", true, true);
+
+        // создаём второй заголовок
+        label2 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
+                4, 4, 0, 3, 1, 1, "Второй заголовок", true, true);
+
+        // создаём третий заголовок
+        label3 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
+                4, 4, 2, 0, 1, 1, "Это тоже заголовок", true, true);
+
+
         // если окну не присвоен ни один из слоёв
         if (window._layer == null)
             throw new RuntimeException("Нет доступных слоёв для создания");
@@ -117,7 +135,11 @@ public class Application implements Consumer<Event> {
         canvas.clear(APP_BACKGROUND_COLOR);
         // рисуем заголовок
         // рисуем заголовок в точке [100,100] с шириной и выостой 200
-        label.paint(canvas, new CoordinateSystem2i(100,100,200,200));
+        label.paint(canvas, windowCS);
+        // рисуем второй заголовок
+        label2.paint(canvas, windowCS);
+        // рисуем третий заголовок
+        label3.paint(canvas, windowCS);
         // восстанавливаем состояние канваса
         canvas.restore();
     }
