@@ -72,7 +72,9 @@ public class Application implements Consumer<Event> {
                 System.out.println("Ошибка создания слоя " + className);
             }
         }
-        label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, "Привет, мир!");
+        // создаём первый заголовок
+        label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
+                "Привет, мир!", true, true);
         // если окну не присвоен ни один из слоёв
         if (window._layer == null)
             throw new RuntimeException("Нет доступных слоёв для создания");
@@ -115,7 +117,7 @@ public class Application implements Consumer<Event> {
         canvas.clear(APP_BACKGROUND_COLOR);
         // рисуем заголовок
         // рисуем заголовок в точке [100,100] с шириной и выостой 200
-        label.paint(canvas, windowCS);
+        label.paint(canvas, new CoordinateSystem2i(100,100,200,200));
         // восстанавливаем состояние канваса
         canvas.restore();
     }
