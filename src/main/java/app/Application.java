@@ -71,35 +71,6 @@ public class Application implements Consumer<Event> {
     public Application() {
         // создаём окно
         window = App.makeWindow();
-        window.setTitle("Java 2D");
-        // задаём обработчиком событий текущий объект
-        window.setEventListener(this);
-        // делаем окно видимым
-        // задаём размер окна
-        window.setWindowSize(900, 900);
-// задаём его положение
-        window.setWindowPosition(100, 100);
-        // задаём иконку
-        switch (Platform.CURRENT) {
-            case WINDOWS -> window.setIcon(new File("src/main/resources/windows.ico"));
-            case MACOS -> window.setIcon(new File("src/main/resources/macos.icns"));
-        }
-        // названия слоёв, которые будем перебирать
-        String[] layerNames = new String[]{
-                "LayerGLSkija", "LayerRasterSkija"
-        };
-
-        // перебираем слои
-        for (String layerName : layerNames) {
-            String className = "io.github.humbleui.jwm.skija." + layerName;
-            try {
-                Layer layer = (Layer) Class.forName(className).getDeclaredConstructor().newInstance();
-                window.setLayer(layer);
-                break;
-            } catch (Exception e) {
-                System.out.println("Ошибка создания слоя " + className);
-            }
-        }
         // создаём первый заголовок
         label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
                 4, 4, 1, 1, 1, 1, "Привет, мир!", true, true);
@@ -132,6 +103,35 @@ public class Application implements Consumer<Event> {
                 2, 1
         );
 
+        window.setTitle("Java 2D");
+        // задаём обработчиком событий текущий объект
+        window.setEventListener(this);
+        // делаем окно видимым
+        // задаём размер окна
+        window.setWindowSize(900, 900);
+// задаём его положение
+        window.setWindowPosition(100, 100);
+        // задаём иконку
+        switch (Platform.CURRENT) {
+            case WINDOWS -> window.setIcon(new File("src/main/resources/windows.ico"));
+            case MACOS -> window.setIcon(new File("src/main/resources/macos.icns"));
+        }
+        // названия слоёв, которые будем перебирать
+        String[] layerNames = new String[]{
+                "LayerGLSkija", "LayerRasterSkija"
+        };
+
+        // перебираем слои
+        for (String layerName : layerNames) {
+            String className = "io.github.humbleui.jwm.skija." + layerName;
+            try {
+                Layer layer = (Layer) Class.forName(className).getDeclaredConstructor().newInstance();
+                window.setLayer(layer);
+                break;
+            } catch (Exception e) {
+                System.out.println("Ошибка создания слоя " + className);
+            }
+        }
 
         // если окну не присвоен ни один из слоёв
         if (window._layer == null)
@@ -144,6 +144,7 @@ public class Application implements Consumer<Event> {
      *
      * @param e событие
      */
+
     @Override
     public void accept(Event e) {
         // если событие - это закрытие окна
@@ -154,10 +155,11 @@ public class Application implements Consumer<Event> {
             window.close();
         } else if (e instanceof EventFrameSkija ee) {
             Surface s = ee.getSurface();
-            paint(s.getCanvas(), new CoordinateSystem2i(
-                    s.getWidth(), s.getHeight()
-            ));
+            paint(s.getCanvas(), new CoordinateSystem2i(s.getWidth(), s.getHeight()));
         }
+        panelControl.accept(e);
+        panelRendering.accept(e);
+        panelLog.accept(e);
     }
     /**
      * Рисование
