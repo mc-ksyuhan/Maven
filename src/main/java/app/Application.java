@@ -1,5 +1,6 @@
 package app;
 
+import controls.InputFactory;
 import controls.Label;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.jwm.skija.EventFrameSkija;
@@ -147,6 +148,7 @@ public class Application implements Consumer<Event> {
             throw new RuntimeException("Нет доступных слоёв для создания");
         window.setVisible(true);
     }
+
     /**
      * Обработчик событий
      *
@@ -197,6 +199,7 @@ public class Application implements Consumer<Event> {
                             return;
 
                         }
+                        case TAB -> InputFactory.nextTab();
                     }
             }
         }
@@ -204,6 +207,7 @@ public class Application implements Consumer<Event> {
         panelRendering.accept(e);
         panelLog.accept(e);
     }
+
     /**
      * Рисование
      *
