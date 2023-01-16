@@ -32,7 +32,12 @@ public class Input extends GridPanel {
      */
     private final int textColor;
 
-
+    /**
+     * флаг, помещён ли сейчас фокус на это поле ввода
+     * (модификатор доступа по умолчанию, чтобы был доступен
+     * фабрике InputFactory внутри пакета)
+     */
+    boolean focused = false;
     /**
      * Панель на сетке
      *
@@ -94,13 +99,15 @@ public class Input extends GridPanel {
                 // рисуем линию текста
                 canvas.drawTextLine(line, 0, 0, paint);
                 // если время рисовать курсор
-                if (InputFactory.cursorDraw()) {
+                if (focused && InputFactory.cursorDraw()) {
                     // смещаем область рисования
                     canvas.translate(line.getWidth(), 0);
                     // рисуем его
                     canvas.drawRect(Rect.makeXYWH(0, metrics.getAscent(), 2, metrics.getHeight()), paint);
                 }
             }
+            // сохраняем область рисования
+            canvas.restore();
 
         }
     }
@@ -224,5 +231,22 @@ public class Input extends GridPanel {
      */
     public String getText() {
         return text;
+    }
+    /**
+     * Установить фокус на это поле ввода
+     */
+    public void setFocus() {
+        // снимаем фокус со всех полей ввода
+        InputFactory.defocusAll();
+        // выделяем текущее поле ввода
+        this.focused = true;
+    }
+    /**
+     * Возвращает флаг, установлен ли фокус на это поле ввода
+     *
+     * @return флаг
+     */
+    public boolean isFocused() {
+        return focused;
     }
 }
