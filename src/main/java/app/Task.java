@@ -49,6 +49,10 @@ public class Task {
      * последняя СК окна
      */
     protected CoordinateSystem2i lastWindowCS;
+    /**
+     * Флаг, решена ли задача
+     */
+    private boolean solved;
 
     /**
      * Задача
@@ -97,6 +101,7 @@ public class Task {
      * @param pointSet множество
      */
     public void addPoint(Vector2d pos, Point.PointSet pointSet) {
+        solved = false;
         Point newPoint = new Point(pos, pointSet);
         points.add(newPoint);
         // Добавляем в лог запись информации
@@ -154,16 +159,27 @@ public class Task {
      */
     public void clear() {
         points.clear();
+        solved = false;
     }
     /**
      * Решить задачу
      */
     public void solve() {
+        solved = true;
         PanelLog.warning("Вызван метод solve()\n Пока что решения нет");
     }
     /**
      * Отмена решения задачи
      */
     public void cancel() {
+        solved = false;
+    }
+    /**
+     * проверка, решена ли задача
+     *
+     * @return флаг
+     */
+    public boolean isSolved() {
+        return solved;
     }
 }

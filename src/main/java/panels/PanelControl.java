@@ -173,8 +173,13 @@ public class PanelControl extends GridPanel {
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 7, 3, 6, 3, 1, "Решить",
                 true, true);
-        solve.setOnClick(() -> {
+        solve.setOnClick(() -> {if (!PanelRendering.task.isSolved()) {
             PanelRendering.task.solve();
+            solve.text = "Сбросить";
+        } else {
+            cancelTask();
+        }
+            window.requestFrame();
         });
         buttons.add(solve);
     }
