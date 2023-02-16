@@ -52,4 +52,8 @@ public static final int LABEL_TEXT_COLOR = Misc.getColor(64, 255, 255, 255);
      * Цвет заливки панели
      */
     public static final int DIALOG_BACKGROUND_COLOR = Misc.getColor(230, 70, 38, 83);
+    /**
+     * Цвет сетки
+     */
+    public static final int TASK_GRID_COLOR = Misc.getColor(64, 255, 255, 255);
 }
