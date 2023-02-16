@@ -48,4 +48,8 @@ public static final int LABEL_TEXT_COLOR = Misc.getColor(64, 255, 255, 255);
     private Colors() {
         throw new AssertionError("Вызов этого конструктора запрещён");
     }
+    /**
+     * Цвет заливки панели
+     */
+    public static final int DIALOG_BACKGROUND_COLOR = Misc.getColor(230, 70, 38, 83);
 }
