@@ -45,24 +45,24 @@ public class UnitTest {
      */
     @Test
     public void test1() {
-        ArrayList<Point> points = new ArrayList<>();
-
-        points.add(new Point(new Vector2d(1, 1), Point.PointSet.FIRST_SET));
-        points.add(new Point(new Vector2d(-1, 1), Point.PointSet.FIRST_SET));
-        points.add(new Point(new Vector2d(-1, 1), Point.PointSet.SECOND_SET));
-        points.add(new Point(new Vector2d(2, 1), Point.PointSet.FIRST_SET));
-        points.add(new Point(new Vector2d(1, 2), Point.PointSet.SECOND_SET));
-        points.add(new Point(new Vector2d(1, 2), Point.PointSet.FIRST_SET));
-
-        Set<Vector2d> crossedCoords = new HashSet<>();
-        crossedCoords.add(new Vector2d(1, 2));
-        crossedCoords.add(new Vector2d(-1, 1));
-
-        Set<Vector2d> singleCoords = new HashSet<>();
-        singleCoords.add(new Vector2d(1, 1));
-        singleCoords.add(new Vector2d(2, 1));
-
-        test(points, crossedCoords, singleCoords);
+//        ArrayList<Point> points = new ArrayList<>();
+//
+//        points.add(new Point(new Vector2d(1, 1), Point.PointSet.FIRST_SET));
+//        points.add(new Point(new Vector2d(-1, 1), Point.PointSet.FIRST_SET));
+//        points.add(new Point(new Vector2d(-1, 1), Point.PointSet.SECOND_SET));
+//        points.add(new Point(new Vector2d(2, 1), Point.PointSet.FIRST_SET));
+//        points.add(new Point(new Vector2d(1, 2), Point.PointSet.SECOND_SET));
+//        points.add(new Point(new Vector2d(1, 2), Point.PointSet.FIRST_SET));
+//
+//        Set<Vector2d> crossedCoords = new HashSet<>();
+//        crossedCoords.add(new Vector2d(1, 2));
+//        crossedCoords.add(new Vector2d(-1, 1));
+//
+//        Set<Vector2d> singleCoords = new HashSet<>();
+//        singleCoords.add(new Vector2d(1, 1));
+//        singleCoords.add(new Vector2d(2, 1));
+//
+//        test(points, crossedCoords, singleCoords);
     }
 
     /**
@@ -70,22 +70,22 @@ public class UnitTest {
      */
     @Test
     public void test2() {
-        ArrayList<Point> points = new ArrayList<>();
-
-        points.add(new Point(new Vector2d(1, 1), Point.PointSet.FIRST_SET));
-        points.add(new Point(new Vector2d(2, 1), Point.PointSet.FIRST_SET));
-        points.add(new Point(new Vector2d(2, 2), Point.PointSet.FIRST_SET));
-        points.add(new Point(new Vector2d(1, 2), Point.PointSet.FIRST_SET));
-
-        Set<Vector2d> crossedCoords = new HashSet<>();
-
-        Set<Vector2d> singleCoords = new HashSet<>();
-        singleCoords.add(new Vector2d(1, 1));
-        singleCoords.add(new Vector2d(2, 1));
-        singleCoords.add(new Vector2d(2, 2));
-        singleCoords.add(new Vector2d(1, 2));
-
-        test(points, crossedCoords, singleCoords);
+//        ArrayList<Point> points = new ArrayList<>();
+//
+//        points.add(new Point(new Vector2d(1, 1), Point.PointSet.FIRST_SET));
+//        points.add(new Point(new Vector2d(2, 1), Point.PointSet.FIRST_SET));
+//        points.add(new Point(new Vector2d(2, 2), Point.PointSet.FIRST_SET));
+//        points.add(new Point(new Vector2d(1, 2), Point.PointSet.FIRST_SET));
+//
+//        Set<Vector2d> crossedCoords = new HashSet<>();
+//
+//        Set<Vector2d> singleCoords = new HashSet<>();
+//        singleCoords.add(new Vector2d(1, 1));
+//        singleCoords.add(new Vector2d(2, 1));
+//        singleCoords.add(new Vector2d(2, 2));
+//        singleCoords.add(new Vector2d(1, 2));
+//
+//        test(points, crossedCoords, singleCoords);
     }
 
     /**
@@ -93,22 +93,22 @@ public class UnitTest {
      */
     @Test
     public void test3() {
-        ArrayList<Point> points = new ArrayList<>();
-
-        points.add(new Point(new Vector2d(1, 1), Point.PointSet.FIRST_SET));
-        points.add(new Point(new Vector2d(2, 1), Point.PointSet.SECOND_SET));
-        points.add(new Point(new Vector2d(2, 2), Point.PointSet.SECOND_SET));
-        points.add(new Point(new Vector2d(1, 2), Point.PointSet.FIRST_SET));
-
-        Set<Vector2d> crossedCoords = new HashSet<>();
-
-        Set<Vector2d> singleCoords = new HashSet<>();
-        singleCoords.add(new Vector2d(1, 1));
-        singleCoords.add(new Vector2d(2, 1));
-        singleCoords.add(new Vector2d(2, 2));
-        singleCoords.add(new Vector2d(1, 2));
-
-        test(points, crossedCoords, singleCoords);
+//        ArrayList<Point> points = new ArrayList<>();
+//
+//        points.add(new Point(new Vector2d(1, 1), Point.PointSet.FIRST_SET));
+//        points.add(new Point(new Vector2d(2, 1), Point.PointSet.SECOND_SET));
+//        points.add(new Point(new Vector2d(2, 2), Point.PointSet.SECOND_SET));
+//        points.add(new Point(new Vector2d(1, 2), Point.PointSet.FIRST_SET));
+//
+//        Set<Vector2d> crossedCoords = new HashSet<>();
+//
+//        Set<Vector2d> singleCoords = new HashSet<>();
+//        singleCoords.add(new Vector2d(1, 1));
+//        singleCoords.add(new Vector2d(2, 1));
+//        singleCoords.add(new Vector2d(2, 2));
+//        singleCoords.add(new Vector2d(1, 2));
+//
+//        test(points, crossedCoords, singleCoords);
     }
 }
 

@@ -43,6 +43,11 @@ public class Task {
     @Getter
     private final ArrayList<Point> points;
     /**
+     * Список точек
+     */
+    @Getter
+    private final ArrayList<Line> lines;
+    /**
      * Список точек в пересечении
      */
     @Getter
@@ -91,8 +96,22 @@ public class Task {
         this.ownCS = ownCS;
         this.points = points;
         this.crossed = new ArrayList<>();
+        this.lines = new ArrayList<>();
+
+        this.lines.add(new Line(
+                new Point(new Vector2d(0.5, 0.7)),
+                new Point(new Vector2d(-0.7, 0.5))
+        ));
+
+        this.lines.add(new Line(
+                new Point(new Vector2d(0.5, 0.7)),
+                new Point(new Vector2d(0.7, 0.5))
+        ));
+
+
         this.single = new ArrayList<>();
     }
+
     /**
      * Получить положение курсора мыши в СК задачи
      *
@@ -105,6 +124,7 @@ public class Task {
     public Vector2d getRealPos(int x, int y, CoordinateSystem2i windowCS) {
         return ownCS.getCoords(x, y, windowCS);
     }
+
     /**
      * Рисование
      *
@@ -123,7 +143,7 @@ public class Task {
     /**
      * Добавить точку
      *
-     * @param pos      положение
+     * @param pos положение
      */
     public void addPoint(Vector2d pos) {
         solved = false;
@@ -151,6 +171,7 @@ public class Task {
             addPoint(taskPos);
         }
     }
+
     /**
      * Добавить случайные точки
      *
@@ -172,9 +193,10 @@ public class Task {
             Vector2i gridPos = addGrid.getRandomCoords();
             // получаем координаты в СК задачи
             Vector2d pos = ownCS.getCoords(gridPos, addGrid);
-                addPoint(pos);
+            addPoint(pos);
         }
     }
+
     /**
      * Очистить задачу
      */
@@ -182,6 +204,7 @@ public class Task {
         points.clear();
         solved = false;
     }
+
     /**
      * Решить задачу
      */
@@ -197,8 +220,8 @@ public class Task {
                 Point a = points.get(i);
                 Point b = points.get(j);
                 // если точки совпадают по положению
-                if (a.pos.equals(b.pos) ) {
-                    if (!crossed.contains(a)){
+                if (a.pos.equals(b.pos)) {
+                    if (!crossed.contains(a)) {
                         crossed.add(a);
                         crossed.add(b);
                     }
@@ -212,12 +235,14 @@ public class Task {
                 single.add(point);
         solved = true;
     }
+
     /**
      * Отмена решения задачи
      */
     public void cancel() {
         solved = false;
     }
+
     /**
      * проверка, решена ли задача
      *
@@ -264,6 +289,7 @@ public class Task {
         // восстанавливаем область рисования
         canvas.restore();
     }
+
     /**
      * Рисование задачи
      *
@@ -289,6 +315,22 @@ public class Task {
                 // рисуем точку
                 canvas.drawRect(Rect.makeXYWH(windowPos.x - POINT_SIZE, windowPos.y - POINT_SIZE, POINT_SIZE * 2, POINT_SIZE * 2), paint);
             }
+            paint.setColor(CROSSED_COLOR);
+            for (Line l : lines) {
+                // опорные точки линии
+                Vector2i pointA = windowCS.getCoords(l.pointA.pos, ownCS);
+                Vector2i pointB = windowCS.getCoords(l.pointB.pos, ownCS);
+                // вектор, ведущий из точки A в точку B
+                Vector2i delta = Vector2i.subtract(pointA, pointB);
+                // получаем максимальную длину отрезка на экране, как длину диагонали экрана
+                int maxDistance = (int) windowCS.getSize().length();
+                // получаем новые точки для рисования, которые гарантируют, что линия
+                // будет нарисована до границ экрана
+                Vector2i renderPointA = Vector2i.sum(pointA, Vector2i.mult(delta, maxDistance));
+                Vector2i renderPointB = Vector2i.sum(pointA, Vector2i.mult(delta, -maxDistance));
+                // рисуем линию
+                canvas.drawLine(renderPointA.x, renderPointA.y, renderPointB.x, renderPointB.y, paint);
+            }
         }
         canvas.restore();
     }
@@ -306,6 +348,7 @@ public class Task {
         // выполняем масштабирование
         ownCS.scale(1 + delta * WHEEL_SENSITIVE, realCenter);
     }
+
     /**
      * Рисование курсора мыши
      *

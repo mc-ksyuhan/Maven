@@ -124,7 +124,16 @@ public class Vector2i {
                 ", " + y +
                 ')';
     }
-
+    /**
+     * Умножение вектора на число
+     *
+     * @param v вектор
+     * @param s число
+     * @return результат умножения
+     */
+    public static Vector2i mult(Vector2i v, int s) {
+        return new Vector2i(v.x * s, v.y * s);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

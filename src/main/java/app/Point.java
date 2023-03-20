@@ -12,8 +12,6 @@ import java.util.Objects;
  * Класс точки
  */
 public class Point {
-
-
     /**
     /**
      * Координаты точки
@@ -89,7 +87,7 @@ public class Point {
      */
     @Override
     public int hashCode() {
-        return Objects.hash( pos);
+        return Objects.hash(pos);
     }
 }
 
