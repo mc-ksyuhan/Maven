@@ -14,7 +14,17 @@ public class Line {
     }
 
     public double getDistance(Point pointC){
-        return ;
+        double xA = this.pointA.pos.x;
+        double xB = this.pointB.pos.x;
+        double yA = this.pointA.pos.y;
+        double yB = this.pointB.pos.y;
+        double xC = pointC.pos.x;
+        double yC = pointC.pos.y;
+        double a = yB-yA;
+        double b = xA-xB;
+        double c = yA*xB-yB*xA;
+        double d = Math.abs(a*xC+b*yC+c)/Math.sqrt(a*a+b*b);
+        return d;
     }
 
     @Override
