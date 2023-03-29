@@ -14,6 +14,8 @@ import misc.Vector2i;
 import panels.PanelLog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static app.Colors.*;
@@ -63,6 +65,28 @@ public class Task {
     @Getter
     @JsonIgnore
     private final ArrayList<Point> selected;
+
+    /**
+     * Список точек выживших
+     */
+    @Getter
+    @JsonIgnore
+    private final ArrayList<Point> survived;
+
+    /**
+     * Список дистанций выживших точек
+     */
+    @Getter
+    @JsonIgnore
+    private ArrayList<Double> distSurv;
+
+    /**
+     * Список двух точек на минимальной дистанции
+     */
+    @Getter
+    @JsonIgnore
+    private final ArrayList<Point> minDist;
+
     /**
      * Список точек в разности
      */
@@ -108,7 +132,10 @@ public class Task {
         this.ownCS = ownCS;
         this.points = points;
         this.selected = new ArrayList<>();
+        this.survived = new ArrayList<>();
         this.lines = new ArrayList<>();
+        this.distSurv = new ArrayList<>();
+        this.minDist = new ArrayList<>();
 
         /*this.lines.add(new Line(
                 new Point(new Vector2d(0.5, 0.7)),
@@ -181,11 +208,45 @@ public class Task {
                             selected.get(0),
                             selected.get(1)
                         ));
-
-                    }
+                    //создаём массив выживших точек
+                        for (Point s: points) {
+                            if (!selected.contains(s)) survived.add(s);
+                        }
+                        for (Point t: survived) {
+                            for (Line l:lines) {
+                                distSurv.add(l.getDistance(t));
+                            }
+                        }
+                        //сортировка и вывод дистанций выживших точек
+                        Collections.sort(distSurv);
+                        for (double ds: distSurv) {
+                            System.out.println(ds);
+                        }
+                        for (Point u:survived){
+                            for (Line l:lines) {
+                                if (l.getDistance(u)==distSurv.get(0) || l.getDistance(u)==distSurv.get(1))    {
+                                    minDist.add(u);
+                                }
+                            }
+                        }
+                            this.lines.add(new Line(
+                                    minDist.get(0),
+                                    minDist.get(1)
+                            ));
+                     }
                 }
             }
         }
+    }
+
+    /**
+     * Найти две точки из массива выживших точек
+     * с минимальной дистанцией
+     *
+     * @param pos положение
+     */
+    public void findPoints(Vector2d pos) {
+
     }
 
     /**
