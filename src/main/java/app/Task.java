@@ -62,7 +62,7 @@ public class Task {
      */
     @Getter
     @JsonIgnore
-    private final ArrayList<Point> added;
+    private final ArrayList<Point> selected;
     /**
      * Список точек в разности
      */
@@ -82,7 +82,7 @@ public class Task {
      */
     private boolean solved;
 
-    private int addedPointsCounter=0;
+    private int selectedPointsCounter=0;
 
     /**
      * Порядок разделителя сетки, т.е. раз в сколько отсечек
@@ -107,7 +107,7 @@ public class Task {
     ) {
         this.ownCS = ownCS;
         this.points = points;
-        this.added = new ArrayList<>();
+        this.selected = new ArrayList<>();
         this.lines = new ArrayList<>();
 
         /*this.lines.add(new Line(
@@ -149,19 +149,43 @@ public class Task {
         // рисуем задачу
         renderTask(canvas, windowCS);
     }
-
     /**
-     * Добавить точку
+     * Добавить точку в массив
      *
      * @param pos положение
      */
     public void addPoint(Vector2d pos) {
         solved = false;
-        addedPointsCounter++;
         Point newPoint = new Point(pos);
-        added.add(newPoint);
+        points.add(newPoint);
         // Добавляем в лог запись информации
         PanelLog.info("точка " + newPoint + " добавлена");
+    }
+
+    /**
+     * Выбрать точку из массива
+     *
+     * @param pos положение
+     */
+    public void selectPoint(Vector2d pos) {
+        solved = false;
+        Point newPoint = new Point(pos);
+        for (Point p: points) {
+            if (Math.abs(newPoint.pos.x-p.pos.x)<=0.2 && Math.abs(newPoint.pos.y-p.pos.y)<=0.2) {
+                if (!selected.contains(p) && selectedPointsCounter<2) {
+                    selectedPointsCounter++;
+                    selected.add(p);
+                    // Добавляем в лог запись информации
+                    PanelLog.info(selectedPointsCounter + "ая точка " + p + " выбрана");
+                    if (selectedPointsCounter==2) {this.lines.add(new Line(
+                            selected.get(0),
+                            selected.get(1)
+                        ));
+
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -176,7 +200,7 @@ public class Task {
         Vector2d taskPos = ownCS.getCoords(pos, lastWindowCS);
         // если левая кнопка мыши, добавляем в множество
         if (mouseButton.equals(MouseButton.PRIMARY)) {
-            addPoint(taskPos);
+            selectPoint(taskPos);
         }
     }
 
@@ -310,7 +334,7 @@ public class Task {
         try (var paint = new Paint()) {
             for (Point p : points) {
                 if (!solved) {
-                    //paint.setColor(p.getColor());
+                    paint.setColor(p.getColor());
                 }
                 // y-координату разворачиваем, потому что у СК окна ось y направлена вниз, а в классическом представлении - вверх
                 Vector2i windowPos = windowCS.getCoords(p.pos.x, p.pos.y, ownCS);
@@ -331,7 +355,7 @@ public class Task {
                 Vector2i renderPointA = Vector2i.sum(pointA, Vector2i.mult(delta, maxDistance));
                 Vector2i renderPointB = Vector2i.sum(pointA, Vector2i.mult(delta, -maxDistance));
                 // рисуем линию
-                //canvas.drawLine(renderPointA.x, renderPointA.y, renderPointB.x, renderPointB.y, paint);
+                canvas.drawLine(renderPointA.x, renderPointA.y, renderPointB.x, renderPointB.y, paint);
 
                 ///выведем d на экран
                 /*Point C = new Point(new Vector2d(5.6, 1.4));
