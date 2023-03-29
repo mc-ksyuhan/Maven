@@ -229,11 +229,13 @@ public class Task {
                                 }
                             }
                         }
+                        //нарисуем вторую линию по точкам с мин. дистанциями
                             this.lines.add(new Line(
                                     minDist.get(0),
                                     minDist.get(1)
                             ));
-                     }
+                        Point w = survived.get(survived.size()/2);
+                    }
                 }
             }
         }
