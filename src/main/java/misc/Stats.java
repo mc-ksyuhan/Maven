@@ -39,17 +39,17 @@ public class Stats {
             // задаём цвет подложки
             paint.setColor(STATS_BACKGROUND_COLOR);
             // X, Y, ширина, высота,
-            // радиусы скругления для каждого угла
+            /*// радиусы скругления для каждого угла
             canvas.drawRRect(RRect.makeXYWH(
                     0, 0, windowCS.getSize().x - padding * 2, 32,
                     4, 4, 0, 0), paint);
-            paint.setColor(STATS_COLOR);
+            paint.setColor(STATS_COLOR);*/
 
-            // рисуем сам график
+            /*// рисуем сам график
             for (int i = 0; i < deltaTimes.getLength(); i++) {
                 float currentDelta = deltaTimes.get(i);
                 canvas.drawRect(Rect.makeXYWH(i, Math.min(windowCS.getSize().y, 32 - currentDelta), 1, currentDelta), paint);
-            }
+            }*/
 
             // рассчитываем длину очереди
             int len = windowCS.getSize().x - padding * 2;

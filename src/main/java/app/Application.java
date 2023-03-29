@@ -26,18 +26,7 @@ import static app.Colors.*;
  * Класс окна приложения
  */
 public class Application implements Consumer<Event> {
-    /**
-     * Первый заголовок
-     */
-    private final Label label;
-    /**
-     * Первый заголовок
-     */
-    private final Label label2;
-    /**
-     * Первый заголовок
-     */
-    private final Label label3;
+
     /**
      * отступы панелей
      */
@@ -114,35 +103,25 @@ public class Application implements Consumer<Event> {
         window = App.makeWindow();
         // панель информации
         panelInfo = new PanelInfo(window, true, DIALOG_BACKGROUND_COLOR, PANEL_PADDING);
-        // создаём первый заголовок
-        label = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                4, 4, 1, 1, 1, 1, "Привет, мир!", true, true);
 
-        // создаём второй заголовок
-        label2 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                4, 4, 0, 3, 1, 1, "Второй заголовок", true, true);
-
-        // создаём третий заголовок
-        label3 = new Label(window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING,
-                4, 4, 2, 0, 1, 1, "Это тоже заголовок", true, true);
-        // создаём панель рисования
+        // создаём панель рисования (лв)
         panelRendering = new PanelRendering(
-                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 0, 0,
-                3, 2
+                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 4, 0, 0,
+                3, 3
         );
-        // создаём панель управления
+        // создаём панель управления (пв)
         panelControl = new PanelControl(
-                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 3, 0,
-                2, 2
+                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 4, 3, 0,
+                2, 3
         );
-        // создаём панель лога
+        // создаём панель лога (лн)
         panelLog = new PanelLog(
-                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 0, 2,
+                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 4, 0, 3,
                 3, 1
         );
-        // создаём панель помощи
+        // создаём панель помощи (пн)
         panelHelp = new PanelHelp(
-                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 3, 2,
+                window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 4, 3, 3,
                 2, 1);;
         // Панель выбора файла
         panelSelectFile = new PanelSelectFile(window, true, DIALOG_BACKGROUND_COLOR, PANEL_PADDING);
@@ -249,7 +228,7 @@ public class Application implements Consumer<Event> {
                 // передаём события на обработку панелям
                 panelControl.accept(e);
                 panelRendering.accept(e);
-                panelLog.accept(e);
+                //panelLog.accept(e);
             }
         }
     }

@@ -22,6 +22,7 @@ import static app.Colors.*;
  * Класс задачи
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
+
 public class Task {
     /**
      * Текст задачи
@@ -47,27 +48,27 @@ public class Task {
     @Getter
     private final CoordinateSystem2d ownCS;
     /**
-     * Список точек
+     * Список точек (начальный)
      */
     @Getter
     private final ArrayList<Point> points;
     /**
-     * Список точек
+     * Список линий
      */
     @Getter
     private final ArrayList<Line> lines;
     /**
-     * Список точек в пересечении
+     * Список точек выделенных
      */
     @Getter
     @JsonIgnore
-    private final ArrayList<Point> crossed;
+    private final ArrayList<Point> added;
     /**
      * Список точек в разности
      */
-    @Getter
+    /*@Getter
     @JsonIgnore
-    private final ArrayList<Point> single;
+    private final ArrayList<Point> single;*/
     /**
      * Размер точки
      */
@@ -80,6 +81,8 @@ public class Task {
      * Флаг, решена ли задача
      */
     private boolean solved;
+
+    private int addedPointsCounter=0;
 
     /**
      * Порядок разделителя сетки, т.е. раз в сколько отсечек
@@ -104,21 +107,19 @@ public class Task {
     ) {
         this.ownCS = ownCS;
         this.points = points;
-        this.crossed = new ArrayList<>();
+        this.added = new ArrayList<>();
         this.lines = new ArrayList<>();
 
-        this.lines.add(new Line(
+        /*this.lines.add(new Line(
                 new Point(new Vector2d(0.5, 0.7)),
                 new Point(new Vector2d(-0.7, 0.5))
         ));
 
-        /*this.lines.add(new Line(
+        this.lines.add(new Line(
                 new Point(new Vector2d(0.5, 0.7)),
                 new Point(new Vector2d(0.7, 0.5))
         ));*/
-
-
-        this.single = new ArrayList<>();
+        //this.single = new ArrayList<>();
     }
 
     /**
@@ -156,14 +157,15 @@ public class Task {
      */
     public void addPoint(Vector2d pos) {
         solved = false;
+        addedPointsCounter++;
         Point newPoint = new Point(pos);
-        points.add(newPoint);
+        added.add(newPoint);
         // Добавляем в лог запись информации
         PanelLog.info("точка " + newPoint + " добавлена");
     }
 
     /**
-     * Клик мыши по пространству задачи
+     * Клик мыши по точке на экране
      *
      * @param pos         положение мыши
      * @param mouseButton кнопка мыши
@@ -172,11 +174,8 @@ public class Task {
         if (lastWindowCS == null) return;
         // получаем положение на экране
         Vector2d taskPos = ownCS.getCoords(pos, lastWindowCS);
-        // если левая кнопка мыши, добавляем в первое множество
+        // если левая кнопка мыши, добавляем в множество
         if (mouseButton.equals(MouseButton.PRIMARY)) {
-            addPoint(taskPos);
-            // если правая, то во второе
-        } else if (mouseButton.equals(MouseButton.SECONDARY)) {
             addPoint(taskPos);
         }
     }
@@ -217,10 +216,10 @@ public class Task {
     /**
      * Решить задачу
      */
-    public void solve() {
+   /*public void solve() {
         // очищаем списки
-        crossed.clear();
-        single.clear();
+        added.clear();
+        //single.clear();
 
         // перебираем пары точек
         for (int i = 0; i < points.size(); i++) {
@@ -243,7 +242,7 @@ public class Task {
             if (!crossed.contains(point))
                 single.add(point);
         solved = true;
-    }
+    }*/
 
     /**
      * Отмена решения задачи
@@ -311,15 +310,9 @@ public class Task {
         try (var paint = new Paint()) {
             for (Point p : points) {
                 if (!solved) {
-                    paint.setColor(p.getColor());
-                } else {
-                    if (crossed.contains(p))
-                        paint.setColor(CROSSED_COLOR);
-                    else
-                        paint.setColor(SUBTRACTED_COLOR);
+                    //paint.setColor(p.getColor());
                 }
-                // y-координату разворачиваем, потому что у СК окна ось y направлена вниз,
-                // а в классическом представлении - вверх
+                // y-координату разворачиваем, потому что у СК окна ось y направлена вниз, а в классическом представлении - вверх
                 Vector2i windowPos = windowCS.getCoords(p.pos.x, p.pos.y, ownCS);
                 // рисуем точку
                 canvas.drawRect(Rect.makeXYWH(windowPos.x - POINT_SIZE, windowPos.y - POINT_SIZE, POINT_SIZE * 2, POINT_SIZE * 2), paint);
@@ -338,7 +331,7 @@ public class Task {
                 Vector2i renderPointA = Vector2i.sum(pointA, Vector2i.mult(delta, maxDistance));
                 Vector2i renderPointB = Vector2i.sum(pointA, Vector2i.mult(delta, -maxDistance));
                 // рисуем линию
-                canvas.drawLine(renderPointA.x, renderPointA.y, renderPointB.x, renderPointB.y, paint);
+                //canvas.drawLine(renderPointA.x, renderPointA.y, renderPointB.x, renderPointB.y, paint);
 
                 ///выведем d на экран
                 /*Point C = new Point(new Vector2d(5.6, 1.4));
