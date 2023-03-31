@@ -197,9 +197,9 @@ public class Task {
                             if (!selected.contains(s)) survived.add(s);
                         }
                         for (Point t: survived) {
-                            for (Line l:lines) {
-                                distSurv.add(l.getDistance(t));
-                            }
+                            Line l = lines.get(0);
+                            distSurv.add(l.getDistance(t));
+
                         }
                         //сортировка и вывод дистанций выживших точек
                         Collections.sort(distSurv);
@@ -207,18 +207,32 @@ public class Task {
                             System.out.println(ds);
                         }
                         for (Point u:survived){
-                            for (Line l:lines) {
+                            Line l = lines.get(0);
                                 if (l.getDistance(u)==distSurv.get(0) || l.getDistance(u)==distSurv.get(1))    {
                                     minDist.add(u);
                                 }
-                            }
                         }
                         //нарисуем вторую линию по точкам с мин. дистанциями
                             this.lines.add(new Line(
                                     minDist.get(0),
                                     minDist.get(1)
                             ));
-                        Point w = survived.get(survived.size()/2);
+                        // w2 проекция w1 на вторую прямую
+                        Point w1 = findPoint();
+                        Line l2 = lines.get(1);
+                        double d = l2.getDistance(w1);
+                        double x11 = l2.pointA.pos.x;
+                        double y11 = l2.pointA.pos.y;
+                        double x12 = l2.pointB.pos.x;
+                        double y12 = l2.pointB.pos.y;
+                        double x2 = w1.pos.x;
+                        double y2 = w1.pos.y;
+                        Point w2 = new Point (new Vector2d(
+                                d*(y11-y12)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+x2,
+                                d*(x12-x11)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+y2
+                        ));
+                        //нарисуем максимальную дистанцию
+                        this.lines.add(new Line(w1, w2));
                     }
                 }
             }
@@ -226,12 +240,18 @@ public class Task {
     }
 
     /**
-     * Найти две точки из массива выживших точек
-     * с минимальной дистанцией
-     *
-     * @param pos положение
+     * Найти точку из массива выживших точек
+     * с максимальной дистанцией
      */
-    public void findPoints(Vector2d pos) {
+    public Point findPoint() {
+        for (Point u:survived){
+            Line l = lines.get(0);
+            if (l.getDistance(u)==distSurv.get(distSurv.size()/2))    {
+                Point w1 = u;
+                return w1;
+            }
+        }
+        return new Point(new Vector2d(0,0));
     }
 
     /**
