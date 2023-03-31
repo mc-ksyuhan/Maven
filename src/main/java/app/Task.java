@@ -388,16 +388,26 @@ public class Task {
         // создаём перо
         try (var paint = new Paint()) {
             for (Point p : points) {
-                if (!solved) {
-                    paint.setColor(p.getColor());
+                if (minDist.contains(p)) {
+                    paint.setColor(MINDIST_COLOR);
+                } else if (p == findPoint()) {
+                    paint.setColor(MAXDIST_COLOR);
                 }
+                else {paint.setColor(p.getColor());}
                 // y-координату разворачиваем, потому что у СК окна ось y направлена вниз, а в классическом представлении - вверх
                 Vector2i windowPos = windowCS.getCoords(p.pos.x, p.pos.y, ownCS);
                 // рисуем точку
                 canvas.drawRect(Rect.makeXYWH(windowPos.x - POINT_SIZE, windowPos.y - POINT_SIZE, POINT_SIZE * 2, POINT_SIZE * 2), paint);
             }
-            paint.setColor(CROSSED_COLOR);
+            paint.setColor(SELECTL_COLOR);
             for (Line l : lines) {
+                if (l==lines.get(0)) {
+                        paint.setColor(SELECTL_COLOR);
+                } else if (l==lines.get(1)){
+                    paint.setColor(MINDIST_COLOR);
+                } else if (l==lines.get(2)) {
+                    paint.setColor(MAXDIST_COLOR);
+                } else {paint.setColor(POINT_COLOR);}
                 // опорные точки линии
                 Vector2i pointA = windowCS.getCoords(l.pointA.pos, ownCS);
                 Vector2i pointB = windowCS.getCoords(l.pointB.pos, ownCS);

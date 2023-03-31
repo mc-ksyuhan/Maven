@@ -32,10 +32,21 @@ public class Colors {
      */
     public static final int BUTTON_COLOR = Misc.getColor(80, 0, 0, 0);
     /**
-     * Цвет пересечения
+     * Цвет точек
      */
-    public static final int CROSSED_COLOR = Misc.getColor(200, 0, 255, 255);
-    //public static final int SUBTRACTED_COLOR = Misc.getColor(200, 255, 255, 0); (цвет разности)
+    public static final int POINT_COLOR = Misc.getColor(200, 255, 255, 0);
+    /**
+     * Цвет первой линии
+     */
+    public static final int SELECTL_COLOR = Misc.getColor(200, 0, 255, 255);
+    /**
+     * Цвет мин.дист. точек и второй линии
+     */
+    public static final int MINDIST_COLOR = Misc.getColor(200, 255, 0, 0);
+    /**
+     * Цвет макс.дист. точки и макс.дист
+     */
+    public static final int MAXDIST_COLOR = Misc.getColor(200, 0, 200, 0);
 
     /*private Colors() {
         throw new AssertionError("Вызов этого конструктора запрещён"); (запрещённый конструктор)
