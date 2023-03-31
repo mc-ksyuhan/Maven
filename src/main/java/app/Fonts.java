@@ -17,15 +17,9 @@ public class Fonts {
      * 18 шрифт слишком маленький, поэтому приходится определить его немного по-другому
      */
     public static final Font FONT18 = new Font(FontMgr.getDefault().matchFamilyStyle(null, FontStyle.NORMAL), 18);
-    /**
-     * 24 шрифт слишком маленький, поэтому приходится определить его немного по-другому
-     */
-    public static final Font FONT24 = new Font(FontMgr.getDefault().matchFamilyStyle(null, FontStyle.NORMAL), 24);
+    //public static final Font FONT24 = new Font(FontMgr.getDefault().matchFamilyStyle(null, FontStyle.NORMAL), 24); (24 шрифт)
 
-    /**
-     * Запрещённый конструктор
-     */
-    private Fonts() {
-        throw new AssertionError("Этот конструктор нельзя вызывать");
-    }
+    /*private Fonts() {
+        throw new AssertionError("Этот конструктор нельзя вызывать"); (запрещённый конструктор)
+    }*/
 }

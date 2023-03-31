@@ -1,19 +1,16 @@
 package panels;
 
-import controls.Label;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.skija.Canvas;
 import io.github.humbleui.skija.FontMetrics;
 import io.github.humbleui.skija.Paint;
 import misc.CoordinateSystem2i;
 import misc.Misc;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import static app.Fonts.FONT12;
 
 /**
@@ -56,8 +53,6 @@ public class PanelLog extends GridPanel {
      */
     private static final List<Record> logs = new ArrayList<>();
 
-
-
     /**
      * Панель управления
      *
@@ -87,7 +82,6 @@ public class PanelLog extends GridPanel {
      */
     @Override
     public void accept(Event e) {
-
     }
 
     /**
@@ -188,6 +182,7 @@ public class PanelLog extends GridPanel {
     public static void error(String text) {
         addToLog(RecordType.ERROR, text);
     }
+
     /**
      * Получить цвет строки лога
      *
@@ -202,5 +197,4 @@ public class PanelLog extends GridPanel {
             case SUCCESS -> Misc.getColor(144, 0, 255, 0);
         };
     }
-
 }

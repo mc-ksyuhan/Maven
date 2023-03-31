@@ -24,7 +24,6 @@ public class SumQueue {
      * Значения
      */
     public float[] values = new float[QUEUE_INIT_LENGTH];
-
     /**
      * Добавить элемент
      *
@@ -40,7 +39,6 @@ public class SumQueue {
             // увеличиваем её на 1
             dataLength++;
     }
-
     /**
      * Получить среднее значение очереди
      *
@@ -66,7 +64,6 @@ public class SumQueue {
         // выводим среднее
         return res / cnt;
     }
-
     /**
      * Получить длину очереди
      *
@@ -75,7 +72,6 @@ public class SumQueue {
     public int getLength() {
         return values.length;
     }
-
     /**
      * Задать длину очереди
      *
@@ -90,15 +86,9 @@ public class SumQueue {
         dataLength = 0;
     }
 
-    /**
-     * Получить элемент очереди ппо индексу
-     *
-     * @param i индекс
-     * @return элемент очереди
-     */
-    public float get(int i) {
+    /*public float get(int i) { (Получить элемент очереди ппо индексу, @param i индекс, @return элемент очереди)
         // получаем положение с учётом зацикливания
         var idx = (cursor + i) % values.length;
         return values[idx];
-    }
+    }*/
 }

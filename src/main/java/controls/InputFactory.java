@@ -1,7 +1,6 @@
 package controls;
 
 import io.github.humbleui.jwm.Window;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -10,8 +9,6 @@ import java.util.TimerTask;
 /**
  * Фабрика полей ввода
  */
-
-
 public class InputFactory {
     /**
      * Поля ввода
@@ -33,7 +30,6 @@ public class InputFactory {
      * флаг, нужно ли рисовать курсоа
      */
     private static boolean cursorDraw = true;
-
     static {
         // запускаем таймер, срабатывающий каждые 500 мс
         // он попеременно включает и выключает рисование курсора
@@ -52,8 +48,6 @@ public class InputFactory {
         for (Input input : inputs)
             input.focused = false;
     }
-
-
     /**
      * Получить новое поле ввода
      *
@@ -86,12 +80,10 @@ public class InputFactory {
         if (addToTabGroup) {
             tabGroup.add(inputs.size() - 1);
         }
-
         // изначально ничего не выбрано, по первому tab
         // положение станет равным нулю, и мы получим первый
         // элемент tab группы
         tabPos = -1;
-
         return input;
     }
     /**
@@ -102,8 +94,6 @@ public class InputFactory {
     public static boolean cursorDraw() {
         return cursorDraw;
     }
-
-
     /**
      * Следующий элемент
      */
@@ -115,12 +105,10 @@ public class InputFactory {
             tabPos = 0;
         inputs.get(tabGroup.get(tabPos)).setFocus();
     }
-
     /**
      * Запрещаем вызов конструктора
      */
     private InputFactory() {
         throw new AssertionError("Вызов этого конструктора запрещён!");
     }
-
 }

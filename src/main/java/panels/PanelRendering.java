@@ -1,6 +1,5 @@
 package panels;
 
-import app.Point;
 import app.Task;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dialogs.PanelSelectFile;
@@ -13,14 +12,10 @@ import misc.CoordinateSystem2d;
 import misc.CoordinateSystem2i;
 import misc.Stats;
 import misc.Vector2d;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
-
 import static app.Fonts.FONT12;
-
 
 /**
  * Панель рисования
@@ -34,7 +29,6 @@ public class PanelRendering extends GridPanel {
      * Статистика fps
      */
     private final Stats fpsStats;
-
 
     /**
      * Панель управления
@@ -55,12 +49,10 @@ public class PanelRendering extends GridPanel {
             int gridX, int gridY, int colspan, int rowspan
     ) {
         super(window, drawBG, color, padding, gridWidth, gridHeight, gridX, gridY, colspan, rowspan);
-
         // ОСК от [-10.0,-10.0] до [10.0,10.0]
         CoordinateSystem2d cs = new CoordinateSystem2d(
                 new Vector2d(-10.0, -10.0), new Vector2d(10.0, 10.0)
         );
-
         // создаём задачу без точек
         task = new Task(cs, new ArrayList<>());
         // добавляем в нё 10 случайных
@@ -142,8 +134,6 @@ public class PanelRendering extends GridPanel {
             }
         });
     }
-
-
     /**
      * Загрузить файл
      */
@@ -153,6 +143,7 @@ public class PanelRendering extends GridPanel {
                 PanelLog.info("load from " + s);
                 loadFromFile(s);
             }
-        });
+        }
+        );
     }
 }

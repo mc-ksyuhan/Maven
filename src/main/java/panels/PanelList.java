@@ -7,14 +7,11 @@ import io.github.humbleui.skija.Paint;
 import io.github.humbleui.skija.RRect;
 import misc.CoordinateSystem2i;
 import misc.Vector2i;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-
 import static app.Colors.*;
-
 
 /**
  * Панель списка
@@ -52,7 +49,6 @@ public class PanelList extends GridPanel {
      * id выбранной кнопки
      */
     int selectedButtonId;
-
     /**
      * Панель на сетке
      *
@@ -109,22 +105,18 @@ public class PanelList extends GridPanel {
                     buttons.get(i).selected = true;
                 } else
                     buttons.get(i).checkOver(lastWindowCS.getRelativePos(new Vector2i(ee)));
-
             }
             // событие нажатия мыши
         } else if (e instanceof EventMouseButton ee) {
             if (!lastInside || !ee.isPressed())
                 return;
-
             Vector2i relPos = lastWindowCS.getRelativePos(lastMove);
-
             // пробуем кликнуть по всем кнопкам
             for (int i = 0; i < buttons.size(); i++) {
                 buttons.get(i).click(relPos);
                 if (buttons.get(i).contains(relPos))
                     selectedButtonId = i;
             }
-
             // перерисовываем окно
             window.requestFrame();
             // обработчик ввода текста
@@ -133,13 +125,11 @@ public class PanelList extends GridPanel {
                 // если строк для вывода меньше чем строк отображения
                 if (lines.get().size() <= renderLineCnt)
                     return;
-
                 start -= (int) ee.getDeltaY() / 100;
                 if (start >= lines.get().size() - renderLineCnt)
                     start = lines.get().size() - renderLineCnt - 1;
                 else if (start < 0)
                     start = 0;
-
             }
             window.requestFrame();
         }

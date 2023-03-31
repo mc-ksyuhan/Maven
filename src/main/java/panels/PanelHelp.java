@@ -1,12 +1,10 @@
 package panels;
 
 import java.util.*;
-
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.skija.*;
 import io.github.humbleui.skija.RRect;
 import misc.CoordinateSystem2i;
-
 import static app.Colors.HELP_TEXT;
 import static app.Colors.HELP_TEXT_BACKGROUND;
 import static app.Fonts.FONT12;
@@ -19,13 +17,11 @@ public class PanelHelp extends GridPanel {
      * Отступ в списке
      */
     float HELP_PADDING = 8;
-
     /**
      * Управляющие сочетания клавиш
      */
     record Shortcut(String command, boolean ctrl, String text) {
     }
-
     /**
      * список управляющих сочетаний клавиш
      */
@@ -69,8 +65,6 @@ public class PanelHelp extends GridPanel {
         // получаем модификатор в зависимости от операционной системы
         // 8984 - код символа cmd у Mac
         String modifier = Platform.CURRENT == Platform.MACOS ? ((char) 8984 + " ") : "Ctrl ";
-
-
         // Получаем кисти
         try (Paint bg = new Paint().setColor(HELP_TEXT_BACKGROUND);
              Paint fg = new Paint().setColor(HELP_TEXT)) {
@@ -86,11 +80,9 @@ public class PanelHelp extends GridPanel {
             }
             // получаем высоту
             float bgHeight = capHeight + HELP_PADDING * 2;
-
             // положение первой строки
             float x = HELP_PADDING;
             float y = HELP_PADDING;
-
             // перебираем комбинации
             for (Shortcut shortcut : shortcuts) {
                 // получаем полный текст команды

@@ -13,7 +13,6 @@ import java.util.Objects;
  */
 public class Point {
     /**
-    /**
      * Координаты точки
      */
     public final Vector2d pos;
@@ -28,7 +27,6 @@ public class Point {
         this.pos = pos;
     }
 
-
     /**
      * Получить цвет точки по её множеству
      *
@@ -40,16 +38,13 @@ public class Point {
     }
 
     /**
-     * Получить положение
-     * (нужен для json)
+     * Получить положение (нужен для json)
      *
      * @return положение
      */
     public Vector2d getPos() {
         return pos;
     }
-
-
 
     /**
      * Строковое представление объекта
@@ -90,4 +85,3 @@ public class Point {
         return Objects.hash(pos);
     }
 }
-

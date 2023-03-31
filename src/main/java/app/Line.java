@@ -3,7 +3,6 @@ package app;
 import java.util.Objects;
 
 public class Line {
-
     Point pointA;
     Point pointB;
 

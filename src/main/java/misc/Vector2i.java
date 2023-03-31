@@ -2,7 +2,6 @@ package misc;
 
 import io.github.humbleui.jwm.Event;
 import io.github.humbleui.jwm.EventMouseMove;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -17,7 +16,6 @@ public class Vector2i {
      * y - координата вектора
      */
     public int y;
-
     /**
      * Конструктор вектора
      *
@@ -88,13 +86,10 @@ public class Vector2i {
         );
     }
 
-    /**
-     * Увеличить каждую из координат на 1
-     */
-    public void inc() {
+    /*public void inc() { (увеличить каждую из координат на 1)
         this.x++;
         this.y++;
-    }
+    }*/
 
     /**
      * уменьшить каждую из координат на 1
@@ -124,6 +119,7 @@ public class Vector2i {
                 ", " + y +
                 ')';
     }
+
     /**
      * Умножение вектора на число
      *
@@ -152,4 +148,3 @@ public class Vector2i {
         return result;
     }
 }
-

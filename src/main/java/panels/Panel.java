@@ -5,11 +5,8 @@ import io.github.humbleui.skija.Canvas;
 import io.github.humbleui.skija.Paint;
 import misc.CoordinateSystem2i;
 import misc.Vector2i;
-
 import java.util.function.Consumer;
-
 import static app.Application.C_RAD_IN_PX;
-
 
 /**
  * Класс панели
@@ -43,7 +40,6 @@ public abstract class Panel implements Consumer<Event> {
      * последняя СК окна
      */
     protected CoordinateSystem2i lastWindowCS;
-
     /**
      * Конструктор панели
      *
@@ -120,5 +116,4 @@ public abstract class Panel implements Consumer<Event> {
             lastInside = contains(lastMove);
         }
     }
-
 }

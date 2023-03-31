@@ -1,22 +1,14 @@
 package panels;
 
-import app.Point;
 import app.Task;
 import java.util.ArrayList;
-
 import controls.*;
-import dialogs.PanelInfo;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.skija.Canvas;
 import misc.CoordinateSystem2i;
-import misc.Vector2d;
 import misc.Vector2i;
-
 import java.util.List;
-
 import static app.Application.PANEL_PADDING;
-import static app.Colors.FIELD_BACKGROUND_COLOR;
-import static app.Colors.FIELD_TEXT_COLOR;
 
 /**
  * Панель управления
@@ -137,21 +129,18 @@ public class PanelControl extends GridPanel {
             cancelTask();
         });
         buttons.add(load);
-
         Button save = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 8, 3, 7, 3, 1, "Сохранить",
                 true, true);
         save.setOnClick(PanelRendering::save);
         buttons.add(save);
-
         Button clear = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 10, 0, 8, 3, 1, "Очистить",
                 true, true);
         clear.setOnClick(() -> PanelRendering.task.clear());
         buttons.add(clear);
-
         solve = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 10, 3, 8, 3, 1, "Решить",
@@ -173,7 +162,6 @@ public class PanelControl extends GridPanel {
         });
         buttons.add(solve);
     }
-
     /**
      * Обработчик событий
      *
@@ -195,7 +183,6 @@ public class PanelControl extends GridPanel {
         } else if (e instanceof EventMouseButton ee) {
             if (!lastInside || !ee.isPressed())
                 return;
-
             Vector2i relPos = lastWindowCS.getRelativePos(lastMove);
             // пробуем кликнуть по всем кнопкам
             for (Button button : buttons) {
@@ -231,7 +218,6 @@ public class PanelControl extends GridPanel {
             window.requestFrame();
         }
     }
-
     /**
      * Метод под рисование в конкретной реализации
      *

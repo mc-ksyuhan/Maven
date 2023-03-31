@@ -7,7 +7,6 @@ import java.util.List;
  * Вспомогательная библиотека
  */
 public class Misc {
-
     /**
      * Получить цвет по компонентам
      *
@@ -20,8 +19,6 @@ public class Misc {
     public static int getColor(int a, int r, int g, int b) {
         return ((a * 256 + r) * 256 + g) * 256 + b;
     }
-
-
     /**
      * Запрещаем вызов конструктора
      */
@@ -66,5 +63,4 @@ public class Misc {
         // возвращаем его
         return lst;
     }
-
 }

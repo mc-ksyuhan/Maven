@@ -1,6 +1,5 @@
 package controls;
 
-import controls.MultiLineLabel;
 import io.github.humbleui.jwm.Window;
 import io.github.humbleui.skija.Canvas;
 import io.github.humbleui.skija.Paint;
@@ -8,7 +7,6 @@ import io.github.humbleui.skija.RRect;
 import io.github.humbleui.types.IRect;
 import misc.CoordinateSystem2i;
 import misc.Vector2i;
-
 import static app.Colors.BUTTON_COLOR;
 
 /**

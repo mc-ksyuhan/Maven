@@ -6,7 +6,6 @@ import io.github.humbleui.skija.Paint;
 import io.github.humbleui.skija.TextLine;
 import misc.CoordinateSystem2i;
 import panels.GridPanel;
-
 import static app.Colors.MULTILINE_TEXT_COLOR;
 import static app.Fonts.FONT12;
 
@@ -81,8 +80,6 @@ public class MultiLineLabel extends GridPanel {
         lastTextHeight = y;
         // начальное значение для последней сохранённой ширины
         lastTextWidth = 0;
-
-
         // перебираем строки текста
         for (String lineText : text.split("\n")) {
             // создаём линию как объект рисования
@@ -95,13 +92,11 @@ public class MultiLineLabel extends GridPanel {
         }
         // увеличиваем последнюю сохранённую высоту на высоту текста
         lastTextHeight += capHeight;
-
         // если нужно центрировать по горизонтали
         if (centered)
             canvas.translate((windowCS.getSize().x - lastTextWidth) / 2.0f, 0);
         if (vcentered)
             canvas.translate(0, (windowCS.getSize().y - lastTextHeight) / 2.0f);
-
 
         try (Paint fg = new Paint().setColor(MULTILINE_TEXT_COLOR)) {
             // перебираем строки текста
@@ -122,7 +117,6 @@ public class MultiLineLabel extends GridPanel {
                 }
             }
         }
-
         // восстанавливаем области рисования
         canvas.restore();
     }

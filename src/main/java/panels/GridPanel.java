@@ -65,21 +65,16 @@ public abstract class GridPanel extends Panel{
         // рассчитываем размер ячейки таблицы
         int cellWidth = (windowCS.getSize().x - (gridWidth + 1) * padding) / gridWidth;
         int cellHeight = (windowCS.getSize().y - (gridHeight + 1) * padding) / gridHeight;
-
         // если неправильно рассчитаны
         if (cellWidth <= 0 || cellHeight <= 0)
             return;
-
         CoordinateSystem2i gridCS = new CoordinateSystem2i(
                 padding + (cellWidth + padding) * gridX,
                 padding + (cellHeight + padding) * gridY,
                 cellWidth * colspan + padding * (colspan - 1),
                 cellHeight * rowspan + padding * (rowspan - 1)
         );
-
         // рисуем ячейку вместо всей панели
         super.paint(canvas, gridCS);
-
     }
-
 }

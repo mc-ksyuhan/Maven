@@ -64,8 +64,6 @@ public class Input extends GridPanel {
         this.vcentered = vcentered;
         this.textColor = textColor;
     }
-
-
     /**
      * Метод под рисование в конкретной реализации
      *
@@ -111,7 +109,6 @@ public class Input extends GridPanel {
 
         }
     }
-
     /**
      * Обработчик событий
      * При перегрузке обязателен вызов реализации предка
@@ -150,13 +147,7 @@ public class Input extends GridPanel {
             }
         }
     }
-
-    /**
-     * Получить вещественное значение из поля ввода
-     *
-     * @return возвращает значение, если всё ок, в противном случае вернёт 0
-     */
-    public double doubleValue() {
+   /* public double doubleValue() { (получить вещественное значение из поля ввода,@return возвращает значение, если всё ок, в противном случае вернёт 0)
         try {
             // для правильной конвертации, если нужно, заменяем плавающую запятую
             // на плавающую точку
@@ -166,13 +157,7 @@ public class Input extends GridPanel {
         }
         return 0;
     }
-
-    /**
-     * Проверяет, лежит ли в поле ввода правильное вещественное число
-     *
-     * @return флаг
-     */
-    public boolean hasValidDoubleValue() {
+    public boolean hasValidDoubleValue() { (проверяет, лежит ли в поле ввода правильное вещественное число)
         try {
             // для правильной конвертации, если нужно, заменяем плавающую запятую
             // на плавающую точку
@@ -182,13 +167,7 @@ public class Input extends GridPanel {
             return false;
         }
     }
-
-    /**
-     * Получить вещественное значение из поля ввода
-     *
-     * @return возвращает значение, если всё ок, в противном случае вернёт 0
-     */
-    public int intValue() {
+    public int intValue() { (получить вещественное значение из поля ввода,@return возвращает значение, если всё ок, в противном случае вернёт 0)
         try {
             // для правильной конвертации, если нужно, заменяем плавающую запятую
             // на плавающую точку
@@ -198,13 +177,7 @@ public class Input extends GridPanel {
         }
         return 0;
     }
-
-    /**
-     * Проверяет, лежит ли в поле ввода правильное вещественное число
-     *
-     * @return флаг
-     */
-    public boolean hasValidIntValue() {
+    public boolean hasValidIntValue() { (проверяет, лежит ли в поле ввода правильное вещественное число)
         try {
             // для правильной конвертации, если нужно, заменяем плавающую запятую
             // на плавающую точку
@@ -213,7 +186,7 @@ public class Input extends GridPanel {
         } catch (NumberFormatException e) {
             return false;
         }
-    }
+    }*/
 
     /**
      * Задать текст

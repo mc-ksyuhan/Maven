@@ -11,13 +11,11 @@ import misc.CoordinateSystem2i;
 import misc.Vector2i;
 import panels.Panel;
 import panels.PanelList;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
-
 import static app.Colors.*;
 
 /**
@@ -91,40 +89,29 @@ public class PanelSelectFile extends Panel {
         infoLabel = new MultiLineLabel(window, false, backgroundColor, CONTROL_PADDING,
                 6, 5, 2, 0, 2, 1, "",
                 true, true);
-
-
         listPanel = new PanelList(window, false, APP_BACKGROUND_COLOR, CONTROL_PADDING,
                 6, 5, 2, 1, 2, 2, PanelSelectFile::getFileList,
                 s -> {
                     processSelectedFile(s);
                     window.requestFrame();
                 }, 10);
-
-
         pathInput = new Input(window, false, backgroundColor, CONTROL_PADDING,
                 6, 5, 2, 4, 2, 1, "",
                 true, MULTILINE_TEXT_COLOR);
         pathLabel = new Label(window, false, backgroundColor, CONTROL_PADDING,
                 6, 5, 1, 4, 1, 1, "Путь к файлу:",
                 true, true);
-
         accept = new Button(
                 window, false, BUTTON_COLOR, CONTROL_PADDING,
                 6, 5, 2, 3, 1, 1, "ОК",
                 true, true);
-
         accept.setOnClick(PanelSelectFile::accept);
-
         cancel = new Button(
                 window, false, BUTTON_COLOR, CONTROL_PADDING,
                 6, 5, 3, 3, 1, 1, "Отмена",
                 true, true);
-
         cancel.setOnClick(() -> Application.currentMode = Application.Mode.WORK);
-
     }
-
-
     /**
      * Выбрать текущий файл
      */
@@ -134,7 +121,6 @@ public class PanelSelectFile extends Panel {
         // обрабатываем полученный файл
         processFile.accept(pathText);
     }
-
     /**
      * Вывести информацию
      *
@@ -149,7 +135,6 @@ public class PanelSelectFile extends Panel {
         // сохраняем обработчик выбранного файла
         processFile = processFileConsumer;
     }
-
     /**
      * ОБработчик выбранного файла
      *
@@ -164,9 +149,7 @@ public class PanelSelectFile extends Panel {
             folderPath += "/" + fileName;
         else
             pathText = folderPath + "/" + fileName;
-
     }
-
     /**
      * Получить список файлов
      *
@@ -179,11 +162,8 @@ public class PanelSelectFile extends Panel {
             if (file.isDirectory() || file.getName().matches("[a-zA-Z-_0-9]*.json"))
                 lst.add(file.getName());
         }
-
         return lst;
     }
-
-
     /**
      * Обработчик событий
      *
@@ -201,13 +181,8 @@ public class PanelSelectFile extends Panel {
             pathInput.accept(e);
             // событие нажатия мыши
         } else if (e instanceof EventMouseButton ee) {
-
-            if (!lastInside || !ee.isPressed())
-            return;
-
-
+            if (!lastInside || !ee.isPressed()) return;
             Vector2i relPos = lastWindowCS.getRelativePos(lastMove);
-
             accept.click(relPos);
             cancel.click(relPos);
             listPanel.accept(e);
@@ -236,7 +211,6 @@ public class PanelSelectFile extends Panel {
             pathText = pathInput.getText();
         }
     }
-
     /**
      * Метод под рисование в конкретной реализации
      *

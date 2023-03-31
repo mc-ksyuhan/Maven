@@ -12,36 +12,31 @@ import misc.CoordinateSystem2i;
 import misc.Vector2d;
 import misc.Vector2i;
 import panels.PanelLog;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.concurrent.ThreadLocalRandom;
-
 import static app.Colors.*;
 
 /**
  * Класс задачи
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
-
 public class Task {
     /**
      * Текст задачи
      */
     public static final String TASK_TEXT = """
             ПОСТАНОВКА ЗАДАЧИ:
-            Дано множество точек на плоскости. Выберем из этого 
-            множества две точки и проведем через них прямую. 
-            Назовем дистанцией такую величину, что на расстоянии 
-            от прямой не меньше, чем дистанция лежит хотя бы 
-            половина оставшихся точек множества (кроме этих двух). 
-            Найти такую пару точек, у которой дистанция будет 
-            минимальна. В качестве ответа: выделить эти две точки, 
-            нарисовать проходящую через них прямую, выделить 
-            точки, лежащие на дистанции, нарисовать дистанцию 
-            (отрезок от одной из самых удаленных точек до прямой), 
-            а также "коридор" (две прямые, параллельные найденной 
+            Дано множество точек на плоскости. Выберем из этого
+            множества две точки и проведем через них прямую.
+            Назовем дистанцией такую величину, что на расстоянии
+            от прямой не меньше, чем дистанция лежит хотя бы
+            половина оставшихся точек множества (кроме этих двух).
+            Найти такую пару точек, у которой дистанция будет
+            минимальна. В качестве ответа: выделить эти две точки,
+            нарисовать проходящую через них прямую, выделить
+            точки, лежащие на дистанции, нарисовать дистанцию
+            (отрезок от одной из самых удаленных точек до прямой),
+            а также "коридор" (две прямые, параллельные найденной
             прямой, находящиеся на найденной дистанции).""";
 
     /**
@@ -65,34 +60,27 @@ public class Task {
     @Getter
     @JsonIgnore
     private final ArrayList<Point> selected;
-
     /**
      * Список точек выживших
      */
     @Getter
     @JsonIgnore
     private final ArrayList<Point> survived;
-
     /**
      * Список дистанций выживших точек
      */
     @Getter
     @JsonIgnore
     private ArrayList<Double> distSurv;
-
     /**
      * Список двух точек на минимальной дистанции
      */
     @Getter
     @JsonIgnore
     private final ArrayList<Point> minDist;
-
-    /**
-     * Список точек в разности
-     */
     /*@Getter
     @JsonIgnore
-    private final ArrayList<Point> single;*/
+    private final ArrayList<Point> single; (точки в разности)*/
     /**
      * Размер точки
      */
@@ -105,19 +93,15 @@ public class Task {
      * Флаг, решена ли задача
      */
     private boolean solved;
-
     private int selectedPointsCounter=0;
-
     /**
-     * Порядок разделителя сетки, т.е. раз в сколько отсечек
-     * будет нарисована увеличенная
+     * Порядок разделителя сетки, т.е. раз во сколько отсечек будет нарисована увеличенная
      */
     private static final int DELIMITER_ORDER = 10;
     /**
      * коэффициент колёсика мыши
      */
     private static final float WHEEL_SENSITIVE = 0.001f;
-
     /**
      * Задача
      *
@@ -248,7 +232,6 @@ public class Task {
      * @param pos положение
      */
     public void findPoints(Vector2d pos) {
-
     }
 
     /**
@@ -281,7 +264,6 @@ public class Task {
         // после нам останется только перевести координаты на решётке
         // в координаты СК задачи
         CoordinateSystem2i addGrid = new CoordinateSystem2i(30, 30);
-
         // повторяем заданное количество раз
         for (int i = 0; i < cnt; i++) {
             // получаем случайные координаты на решётке
@@ -300,10 +282,7 @@ public class Task {
         solved = false;
     }
 
-    /**
-     * Решить задачу
-     */
-   /*public void solve() {
+   /*public void solve() { (решение задачи)
         // очищаем списки
         added.clear();
         //single.clear();
@@ -337,15 +316,9 @@ public class Task {
     public void cancel() {
         solved = false;
     }
-
-    /**
-     * проверка, решена ли задача
-     *
-     * @return флаг
-     */
-    public boolean isSolved() {
+    /*public boolean isSolved() { (проверка, решена ли задача
         return solved;
-    }
+    }*/
 
     /**
      * Рисование сетки
@@ -384,7 +357,6 @@ public class Task {
         // восстанавливаем область рисования
         canvas.restore();
     }
-
     /**
      * Рисование задачи
      *
@@ -419,17 +391,14 @@ public class Task {
                 Vector2i renderPointB = Vector2i.sum(pointA, Vector2i.mult(delta, -maxDistance));
                 // рисуем линию
                 canvas.drawLine(renderPointA.x, renderPointA.y, renderPointB.x, renderPointB.y, paint);
-
                 ///выведем d на экран
                 /*Point C = new Point(new Vector2d(5.6, 1.4));
                 double d = l.getDistance(C);
                 System.out.println(d);*/
-
             }
         }
         canvas.restore();
     }
-
     /**
      * Масштабирование области просмотра задачи
      *
@@ -443,7 +412,6 @@ public class Task {
         // выполняем масштабирование
         ownCS.scale(1 + delta * WHEEL_SENSITIVE, realCenter);
     }
-
     /**
      * Рисование курсора мыши
      *

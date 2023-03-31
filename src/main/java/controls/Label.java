@@ -7,8 +7,6 @@ import io.github.humbleui.skija.Paint;
 import io.github.humbleui.skija.TextLine;
 import misc.CoordinateSystem2i;
 import panels.GridPanel;
-import panels.Panel;
-
 import static app.Colors.LABEL_TEXT_COLOR;
 import static app.Fonts.FONT12;
 
@@ -20,7 +18,6 @@ public class Label extends GridPanel {
      * Текст заголовка
      */
     public String text;
-
     /**
      * Флаг, нужно ли выравнивать текст по центру по горизонтали
      */
@@ -55,8 +52,6 @@ public class Label extends GridPanel {
         this.centered = centered;
         this.vcentered = vcentered;
     }
-
-
     /**
      * Метод рисованияв конкретной реализации
      *
@@ -76,7 +71,6 @@ public class Label extends GridPanel {
                 canvas.translate((windowCS.getSize().x - line.getWidth()) / 2.0f, 0);
             if (vcentered)
                 canvas.translate(0, (windowCS.getSize().y - capHeight) / 2.0f);
-
             // рисуем текст
             try (Paint fg = new Paint().setColor(LABEL_TEXT_COLOR)) {
                 canvas.drawTextLine(line, 0, capHeight, fg);
@@ -85,7 +79,6 @@ public class Label extends GridPanel {
         // восстанавливаем области рисования
         canvas.restore();
     }
-
     /**
      * Обработчик событий
      *

@@ -1,25 +1,19 @@
 package app;
 
 import controls.InputFactory;
-import controls.Label;
 import dialogs.PanelInfo;
 import dialogs.PanelSelectFile;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.jwm.skija.EventFrameSkija;
 import io.github.humbleui.skija.Canvas;
-import io.github.humbleui.skija.Paint;
-import io.github.humbleui.skija.RRect;
 import io.github.humbleui.skija.Surface;
 import misc.CoordinateSystem2i;
-import misc.Misc;
 import panels.PanelControl;
 import panels.PanelHelp;
 import panels.PanelLog;
 import panels.PanelRendering;
-
 import java.io.File;
 import java.util.function.Consumer;
-
 import static app.Colors.*;
 
 /**
@@ -31,34 +25,42 @@ public class Application implements Consumer<Event> {
      * отступы панелей
      */
     public static final int PANEL_PADDING = 5;
+
     /**
      * радиус скругления элементов
      */
     public static final int C_RAD_IN_PX = 4;
+
     /**
      * окно приложения
      */
     private final Window window;
+
     /**
      * панель легенды
      */
     private final PanelHelp panelHelp;
+
     /**
      * панель курсора мыши
      */
     private final PanelControl panelControl;
+
     /**
      * панель рисования
      */
     private final PanelRendering panelRendering;
+
     /**
      * панель событий
      */
     private final PanelLog panelLog;
+
     /**
      * Панель информации
      */
     private final PanelInfo panelInfo;
+
     /**
      * кнопка изменений: у мака - это `Command`, у windows - `Ctrl`
      */
@@ -86,10 +88,12 @@ public class Application implements Consumer<Event> {
          */
         FILE
     }
+
     /**
      * Текущий режим(по умолчанию рабочий)
      */
     public static Mode currentMode = Mode.WORK;
+
     /**
      * Панель выбора файла
      */
@@ -107,33 +111,37 @@ public class Application implements Consumer<Event> {
         // создаём панель рисования (лв)
         panelRendering = new PanelRendering(
                 window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 4, 0, 0,
-                3, 3
-        );
+                3, 3);
+
         // создаём панель управления (пв)
         panelControl = new PanelControl(
                 window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 4, 3, 0,
-                2, 3
-        );
+                2, 3);
+
         // создаём панель лога (лн)
         panelLog = new PanelLog(
                 window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 4, 0, 3,
-                3, 1
-        );
+                3, 1);
+
         // создаём панель помощи (пн)
         panelHelp = new PanelHelp(
                 window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 4, 3, 3,
-                2, 1);;
+                2, 1);
+
         // Панель выбора файла
         panelSelectFile = new PanelSelectFile(window, true, DIALOG_BACKGROUND_COLOR, PANEL_PADDING);
-
         window.setTitle("Java 2D");
+
         // задаём обработчиком событий текущий объект
         window.setEventListener(this);
+
         // делаем окно видимым
         // задаём размер окна
         window.setWindowSize(900, 900);
-// задаём его положение
+
+        // задаём его положение
         window.setWindowPosition(100, 100);
+
         // задаём иконку
         switch (Platform.CURRENT) {
             case WINDOWS -> window.setIcon(new File("src/main/resources/windows.ico"));
@@ -155,7 +163,6 @@ public class Application implements Consumer<Event> {
                 System.out.println("Ошибка создания слоя " + className);
             }
         }
-
         // если окну не присвоен ни один из слоёв
         if (window._layer == null)
             throw new RuntimeException("Нет доступных слоёв для создания");
@@ -218,7 +225,7 @@ public class Application implements Consumer<Event> {
                             }
                         }
                         case TAB -> InputFactory.nextTab();
-                    }
+                }
             }
         }
         switch (currentMode) {
@@ -256,5 +263,4 @@ public class Application implements Consumer<Event> {
         }
         canvas.restore();
     }
-
 }

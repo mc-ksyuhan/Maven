@@ -1,13 +1,10 @@
 package misc;
 
 import io.github.humbleui.skija.*;
-import misc.CoordinateSystem2i;
-import misc.SumQueue;
-
 import static app.Colors.*;
 
 /**
- * Cтатистика
+ * Статистика
  */
 public class Stats {
 
@@ -19,8 +16,6 @@ public class Stats {
      * Очередь временных меток
      */
     private final SumQueue deltaTimes = new SumQueue();
-
-
     /**
      * Рисование
      *
@@ -44,13 +39,11 @@ public class Stats {
                     0, 0, windowCS.getSize().x - padding * 2, 32,
                     4, 4, 0, 0), paint);
             paint.setColor(STATS_COLOR);*/
-
             /*// рисуем сам график
             for (int i = 0; i < deltaTimes.getLength(); i++) {
                 float currentDelta = deltaTimes.get(i);
                 canvas.drawRect(Rect.makeXYWH(i, Math.min(windowCS.getSize().y, 32 - currentDelta), 1, currentDelta), paint);
             }*/
-
             // рассчитываем длину очереди
             int len = windowCS.getSize().x - padding * 2;
             // если она получилась положительной и новая длина отличается от старой
@@ -58,17 +51,14 @@ public class Stats {
                 // задаём новую длину
                 deltaTimes.setLength(len);
             }
-
             // получаем текущее время в мс.
             long now = System.nanoTime();
             // переводим его в секунды
             deltaTimes.add((now - prevTime) / 1000000.0f);
             // сохраняем новое время
             prevTime = now;
-
             // восстанавливаем область рисования
             canvas.restore();
-
             // сохраняем область рисования
             canvas.save();
             // задаём цвет
@@ -83,5 +73,4 @@ public class Stats {
             canvas.restore();
         }
     }
-
 }
