@@ -1,7 +1,5 @@
 package misc;
 
-//import java.util.concurrent.ThreadLocalRandom;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,10 +26,6 @@ public class Vector2d {
         this.x = x;
         this.y = y;
     }
-    /*public Vector2d() { (Конструктор вектора создаёт нулевой вектор)
-        this.x = 0;
-        this.y = 0;
-    }*/
 
     /**
      * Сложить два вектора
@@ -63,28 +57,6 @@ public class Vector2d {
     public static Vector2d mul(Vector2d v, double a) {
         return new Vector2d(v.x * a, v.y * a);
     }
-
-    /*public static Vector2d subtract(Vector2d a, Vector2d b) {
-    (вычесть второй вектор из первого, @param a первый вектор, @param b второй вектор, @return разность двух векторов)
-        return new Vector2d(a.x - b.x, a.y - b.y);
-    }
-
-    public void subtract(Vector2d v) { (вычесть вектор из текущего, @param v вектор, который нужно вычесть)
-        this.x = this.x - v.x;
-        this.y = this.y - v.y;
-    }
-
-    public static Vector2d rand(Vector2d min, Vector2d max) { (получить случайное значение в заданном диапазоне [min,max)),
-        @param min нижняя граница, @param max верхняя граница, @return случайное значение в заданном диапазоне [min,max))
-        return new Vector2d(
-                ThreadLocalRandom.current().nextDouble(min.x, max.x),
-                ThreadLocalRandom.current().nextDouble(min.y, max.y)
-        );
-    }
-
-    public double length() { (получить длину вектора, @return длина вектора)
-        return Math.sqrt(x * x + y * y);
-    }*/
 
     /**
      * Строковое представление объекта

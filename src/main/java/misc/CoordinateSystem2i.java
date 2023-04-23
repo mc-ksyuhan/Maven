@@ -107,11 +107,6 @@ public class CoordinateSystem2i {
     public boolean checkCoords(int x, int y) {
         return x > min.x && y > min.y && x < max.x && y < max.y;
     }
-
-    /*public Vector2i getMax() { (получить максимальную координату, @return максимальная координата)
-        return max;
-    }*/
-
     /**
      * Получить минимальную координата
      *
@@ -146,41 +141,6 @@ public class CoordinateSystem2i {
                 (int) ((y - coordinateSystem.getMin().y) * (size.y - 1) / coordinateSystem.getSize().y + min.y)
         );
     }
-
-    /*public Vector2i getCoords(Vector2i coords, CoordinateSystem2i coordinateSystem) {
-    (получить координаты вектора в текущей системе координат, @param coords координаты вектора в другой системе координат,
-     @param coordinateSystem система координат, в которой заданы координаты вектора, @return координаты вектора в текущей системе координат)
-        return this.getCoords(coords.x, coords.y, coordinateSystem);
-    }
-
-    public Vector2i getCoords(int x, int y, CoordinateSystem2i coordinateSystem) {
-    (получить координаты вектора в текущей системе координат, @param x координата X вектора в другой системе координат,
-    @param y координата Y вектора в другой системе координат, @param coordinateSystem система координат, в которой заданы координаты вектора,
-    @return координаты вектора в текущей системе координат)
-        return new Vector2i(
-                (x - coordinateSystem.min.x) * (size.x - 1) / (coordinateSystem.size.x - 1) + min.x,
-                (y - coordinateSystem.min.y) * (size.y - 1) / (coordinateSystem.size.y - 1) + min.y
-        );
-    }
-
-    public Vector2i getSimilarity(CoordinateSystem2d coordinateSystem) {
-    (получить вектор подобия двух систем координат, (значения единичного размера, указанного в переданнной в аргументах СК в текущей СК),
-    @param coordinateSystem система координат, подобие с которой нужно получить, @return вектор подобий вдоль соответствующиъ осей координат)
-        return new Vector2i(
-                (int) ((size.x - 1) / (coordinateSystem.getSize().x)),
-                (int) ((size.y - 1) / (coordinateSystem.getSize().y))
-        );
-    }
-
-    public Vector2i getSimilarity(CoordinateSystem2i coordinateSystem) { (получить вектор подобия двух систем координат,
-    (значения единичного размера, указанного в переданнной в аргументах СК в текущей СК)
-    @param coordinateSystem система координат, подобие с которой нужно получить,
-    @return вектор подобий вдоль соответствующиъ осей координат)
-        return new Vector2i(
-                (size.x - 1) / (coordinateSystem.getSize().x - 1),
-                (size.y - 1) / (coordinateSystem.getSize().y - 1)
-        );
-    }*/
 
     /**
      * Получить размер СК

@@ -63,7 +63,6 @@ public class Button extends MultiLineLabel {
                 canvas.translate((windowCS.getSize().x - lastTextWidth) / 2.0f + padding, 0);
             if (vcentered)
                 canvas.translate(0, (windowCS.getSize().y - lastTextHeight) / 2.0f);
-
             try (Paint bg = new Paint().setColor(BUTTON_COLOR)) {
                 var bounds = IRect.makeXYWH(0, 0, lastTextWidth, lastTextHeight);
                 canvas.drawRRect(RRect.makeLTRB(bounds.getLeft(), bounds.getTop(), bounds.getRight(), bounds.getBottom(), 4), bg);

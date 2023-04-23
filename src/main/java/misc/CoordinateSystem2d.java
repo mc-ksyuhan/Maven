@@ -32,10 +32,6 @@ public class CoordinateSystem2d {
     public CoordinateSystem2d(double minX, double minY, double sizeX, double sizeY) {
         set(minX, minY, sizeX, sizeY);
     }
-    /*public CoordinateSystem2d(double sizeX, double sizeY) { (конструктор ограниченной двумерной вещественной системы координат
-    @param sizeX размер по оси X, @param sizeY размер по оси Y)
-        this(0, 0, sizeX, sizeY);
-    }*/
     /**
      * Конструктор ограниченной двумерной вещественной системы координат
      *
@@ -59,12 +55,7 @@ public class CoordinateSystem2d {
         size = new Vector2d(sizeX, sizeY);
         max = Vector2d.sum(size, min);
     }
-    /*@JsonIgnore
-    public Vector2d getRandomCoords() { (получить случайные координаты внутри СК, @return случайные координаты внутри СК)
-        Vector2d r = Vector2d.rand(min, max);
-        return r;
-    }
-*/
+
     /**
      * Проверить, попадают ли координаты в границы СК
      *
@@ -74,37 +65,6 @@ public class CoordinateSystem2d {
     public boolean checkCoords(Vector2d coords) {
         return coords.x >= min.x && coords.y >= min.y && coords.x <= max.x && coords.y <= max.y;
     }
-    /*public boolean checkCoords(double x, double y) { (проверить, попадают ли координаты в границы СК,
-@param x координата X, @param y координата Y, @return флаг, попадают ли координаты в границы СК)
-        return checkCoords(new Vector2d(x, y));
-    }
-
-    public Vector2d getCoords(Vector2d coords, CoordinateSystem2d coordinateSystem) { (получить координаты вектора в текущей систему координат
-    @param coords координаты вектора в другой системе координат, @param coordinateSystem система координат, в которой заданы координаты вектора,
-    @return координаты вектора в текущей системе координат)
-        return getCoords(coords.x, coords.y, coordinateSystem);
-    }
-
-    public Vector2d getCoords(double x, double y, CoordinateSystem2d coordinateSystem) {
-    (получить координаты вектора в текущей систему координат, @param x координата X вектора в другой системе координат,
-    @param y координата Y вектора в другой системе координат, @param coordinateSystem система координат, в которой заданы координаты вектора,
-    @return координаты вектора в текущей системе координат)
-        return new Vector2d(
-                (x - coordinateSystem.min.x) * size.x / coordinateSystem.size.x + min.x,
-                (y - coordinateSystem.min.y) * size.y / coordinateSystem.size.y + min.y
-        );
-    }
-
-    public Vector2d getSimilarity(CoordinateSystem2d coordinateSystem) { (получить вектор подобия двух систем координат
-    (значения единичного размера, указанного в переданнной в аргументах СК в текущей СК),
-    @param coordinateSystem система координат, подобие с которой нужно получить,
-    @return вектор подобий вдоль соответствующиъ осей координат)
-        return new Vector2d(
-                size.x / coordinateSystem.getSize().x,
-                size.y / coordinateSystem.getSize().y
-        );
-    }*/
-
     /**
      * Получить координаты вектора в текущей систему координат
      *

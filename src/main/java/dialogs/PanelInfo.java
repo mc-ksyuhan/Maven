@@ -50,13 +50,6 @@ public class PanelInfo extends Panel {
                 true, true);
         accept.setOnClick(() -> Application.currentMode = Application.Mode.WORK);
     }
-
-    /*public static void show(String text) { (вывести информацию, @param text текст)
-        // задаём новый текст
-        labelText = text;
-        // переключаем вывод приложения на режим информации
-        Application.currentMode = Application.Mode.INFO;
-    }*/
     /**
      * Обработчик событий
      *

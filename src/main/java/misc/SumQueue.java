@@ -85,10 +85,4 @@ public class SumQueue {
         // данных нет
         dataLength = 0;
     }
-
-    /*public float get(int i) { (Получить элемент очереди ппо индексу, @param i индекс, @return элемент очереди)
-        // получаем положение с учётом зацикливания
-        var idx = (cursor + i) % values.length;
-        return values[idx];
-    }*/
 }

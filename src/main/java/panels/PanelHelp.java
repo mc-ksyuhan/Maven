@@ -99,7 +99,6 @@ public class PanelHelp extends GridPanel {
                 // смещаемся вниз на
                 y += HELP_PADDING + capHeight * 2 + 2;
             }
-
         }
     }
 }

@@ -170,6 +170,129 @@ public class Task {
     }
 
     /**
+     * Решить
+     */
+    public void solve() {
+        this.lines.add(new Line(
+                selected.get(0),
+                selected.get(1)
+        ));
+
+        //создаём массив выживших точек
+        for (Point s: points) {
+            if (!selected.contains(s)) survived.add(s);
+        }
+        for (Point t: survived) {
+            Line l = lines.get(0);
+            distSurv.add(l.getDistance(t));
+
+        }
+        //сортировка и вывод дистанций выживших точек
+        Collections.sort(distSurv);
+        for (double ds: distSurv) {
+            System.out.println(ds);
+        }
+        for (Point u:survived){
+            Line l = lines.get(0);
+            if (l.getDistance(u)==distSurv.get(0) || l.getDistance(u)==distSurv.get(1))    {
+                minDist.add(u);
+            }
+        }
+        //точки на дистанции
+        for (Point u:survived){
+            Line l = lines.get(0);
+            if (l.getDistance(u)>=distSurv.get(2) && l.getDistance(u)<distSurv.get(distSurv.size()/2))    {
+                dist.add(u);
+            }
+        }
+        //нарисуем вторую линию по точкам с мин. дистанциями
+        this.lines.add(new Line(
+                minDist.get(0),
+                minDist.get(1)
+        ));
+        // w2 проекция w1 на вторую прямую
+        Point w1 = findPoint(); //зелёная точка
+        Line l2 = lines.get(1);
+        double d = l2.getDistance(w1);
+        double x11 = l2.pointA.pos.x;
+        double y11 = l2.pointA.pos.y;
+        double x12 = l2.pointB.pos.x;
+        double y12 = l2.pointB.pos.y;
+        double x2 = w1.pos.x;
+        double y2 = w1.pos.y;
+        double ex1 = -1;
+        double ey1 = -1;
+        double a = y12-y11;
+        if (a==0) a=0.000001;
+        double b = x11-x12;
+        if (b==0) b=0.000001;
+        double c = y11*x12-y12*x11;
+        Point w2 = new Point(new Vector2d(0,0));
+
+        for (int i = 0; i < 2; i++) {
+            ex1=-ex1;
+            for (int j = 0; j < 2; j++) {
+                ey1=-ey1;
+                w2 = new Point(new Vector2d(
+                        ex1*d*(y11-y12)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+x2,
+                        ey1*d*(x12-x11)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+y2
+                ));
+                if (Math.abs(a*w2.pos.x+b*w2.pos.y+c)<=0.5){
+                    //нарисуем максимальную дистанцию
+                    this.lines.add(new Line(w1, w2));
+                    i=j=2; //break
+                }
+            }
+        }
+        //w3 точка симметричная отн-но найденной прямой
+        Point w3 = new Point(new Vector2d(
+                w1.pos.x+2*(w2.pos.x-w1.pos.x),
+                w1.pos.y+2*(w2.pos.y-w1.pos.y)
+
+        ));
+        //this.lines.add(new Line(w2, w3));
+        double c2 = -x2*a-y2*b;
+        double xw12=0;
+        double yw12=0;
+        if (a==0.000001) {
+            xw12=w1.pos.x+1;
+            yw12=w1.pos.y;
+        } else if (b==0.000001) {
+            xw12=w1.pos.x;
+            yw12=w1.pos.y+1;
+        } else {
+            xw12=w1.pos.x+1;
+            yw12=-c2/b-a*xw12/b;
+        }
+
+        Point w12 = new Point(new Vector2d(
+                xw12,
+                yw12
+        ));
+        this.lines.add(new Line(w1, w12));
+
+        double c3 = -w3.pos.x*a-w3.pos.y*b;
+        double xw32=0;
+        double yw32=0;
+        if (a==0.000001) {
+            xw32=w3.pos.x+1;
+            yw32=w3.pos.y;
+        } else if (b==0.000001) {
+            xw32=w3.pos.x;
+            yw32=w3.pos.y+1;
+        } else {
+            xw32=w3.pos.x+1;
+            yw32=-c3/b-a*xw32/b;
+        }
+
+        Point w32 = new Point(new Vector2d(
+                xw32,
+                yw32
+        ));
+        this.lines.add(new Line(w3, w32));
+    }
+
+    /**
      * Выбрать точку из массива
      *
      * @param pos положение
@@ -179,130 +302,16 @@ public class Task {
         Point newPoint = new Point(pos);
         for (Point p: points) {
             if (Math.abs(newPoint.pos.x-p.pos.x)<=0.2 && Math.abs(newPoint.pos.y-p.pos.y)<=0.2||(selected.size()>=2)) {
-                if (!selected.contains(p) && selectedPointsCounter<2) {
-                    selectedPointsCounter++;
+                if (!selected.contains(p) && selectedPointsCounter<=2) {
                     if (selected.size()<2) {
+                        selectedPointsCounter++;
                         selected.add(p);
                         // Добавляем в лог запись информации
                         PanelLog.info(selectedPointsCounter + "ая точка " + p + " выбрана");
                     }
-
-                    if (selectedPointsCounter==2) {this.lines.add(new Line(
-                            selected.get(0),
-                            selected.get(1)
-                    ));
-                        //создаём массив выживших точек
-                        for (Point s: points) {
-                            if (!selected.contains(s)) survived.add(s);
-                        }
-                        for (Point t: survived) {
-                            Line l = lines.get(0);
-                            distSurv.add(l.getDistance(t));
-
-                        }
-                        //сортировка и вывод дистанций выживших точек
-                        Collections.sort(distSurv);
-                        for (double ds: distSurv) {
-                            System.out.println(ds);
-                        }
-                        for (Point u:survived){
-                            Line l = lines.get(0);
-                            if (l.getDistance(u)==distSurv.get(0) || l.getDistance(u)==distSurv.get(1))    {
-                                minDist.add(u);
-                            }
-                        }
-                        //точки на дистанции
-                        for (Point u:survived){
-                            Line l = lines.get(0);
-                            if (l.getDistance(u)>=distSurv.get(2) && l.getDistance(u)<distSurv.get(distSurv.size()/2))    {
-                                dist.add(u);
-                            }
-                        }
-                        //нарисуем вторую линию по точкам с мин. дистанциями
-                        this.lines.add(new Line(
-                                minDist.get(0),
-                                minDist.get(1)
-                        ));
-                        // w2 проекция w1 на вторую прямую
-                        Point w1 = findPoint(); //зелёная точка
-                        Line l2 = lines.get(1);
-                        double d = l2.getDistance(w1);
-                        double x11 = l2.pointA.pos.x;
-                        double y11 = l2.pointA.pos.y;
-                        double x12 = l2.pointB.pos.x;
-                        double y12 = l2.pointB.pos.y;
-                        double x2 = w1.pos.x;
-                        double y2 = w1.pos.y;
-                        double ex1 = -1;
-                        double ey1 = -1;
-                        double a = y12-y11;
-                        if (a==0) a=0.000001;
-                        double b = x11-x12;
-                        if (b==0) b=0.000001;
-                        double c = y11*x12-y12*x11;
-                        Point w2 = new Point(new Vector2d(0,0));
-
-                        for (int i = 0; i < 2; i++) {
-                            ex1=-ex1;
-                            for (int j = 0; j < 2; j++) {
-                                ey1=-ey1;
-                                 w2 = new Point(new Vector2d(
-                                        ex1*d*(y11-y12)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+x2,
-                                        ey1*d*(x12-x11)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+y2
-                                ));
-                                if (Math.abs(a*w2.pos.x+b*w2.pos.y+c)<=0.5){
-                                    //нарисуем максимальную дистанцию
-                                    this.lines.add(new Line(w1, w2));
-                                    i=j=2; //break
-                                }
-                            }
-                        }
-                        //w3 точка симметричная отн-но найденной прямой
-                        Point w3 = new Point(new Vector2d(
-                                w1.pos.x+2*(w2.pos.x-w1.pos.x),
-                                w1.pos.y+2*(w2.pos.y-w1.pos.y)
-
-                        ));
-                        //this.lines.add(new Line(w2, w3));
-                        double c2 = -x2*a-y2*b;
-                        double xw12=0;
-                        double yw12=0;
-                        if (a==0.000001) {
-                            xw12=w1.pos.x+1;
-                            yw12=w1.pos.y;
-                        } else if (b==0.000001) {
-                            xw12=w1.pos.x;
-                            yw12=w1.pos.y+1;
-                        } else {
-                            xw12=w1.pos.x+1;
-                            yw12=-c2/b-a*xw12/b;
-                        }
-
-                        Point w12 = new Point(new Vector2d(
-                                xw12,
-                                yw12
-                        ));
-                        this.lines.add(new Line(w1, w12));
-
-                        double c3 = -w3.pos.x*a-w3.pos.y*b;
-                        double xw32=0;
-                        double yw32=0;
-                        if (a==0.000001) {
-                            xw32=w3.pos.x+1;
-                            yw32=w3.pos.y;
-                        } else if (b==0.000001) {
-                            xw32=w3.pos.x;
-                            yw32=w3.pos.y+1;
-                        } else {
-                            xw32=w3.pos.x+1;
-                            yw32=-c3/b-a*xw32/b;
-                        }
-
-                        Point w32 = new Point(new Vector2d(
-                                xw32,
-                                yw32
-                        ));
-                        this.lines.add(new Line(w3, w32));
+                    if (selectedPointsCounter==2||(selected.size()==2)) {
+                        this.solve();
+                        break;
                     }
                 }
             }
@@ -464,10 +473,6 @@ public class Task {
                 // рисуем линию
                 if (l==lines.get(2)) canvas.drawLine(pointA.x, pointA.y, pointB.x, pointB.y, paint);
                 else canvas.drawLine(renderPointA.x, renderPointA.y, renderPointB.x, renderPointB.y, paint);
-                ///выведем d на экран
-                /*Point C = new Point(new Vector2d(5.6, 1.4));
-                double d = l.getDistance(C);
-                System.out.println(d);*/
             }
         }
         canvas.restore();

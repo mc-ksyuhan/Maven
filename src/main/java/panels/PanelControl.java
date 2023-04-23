@@ -62,38 +62,6 @@ public class PanelControl extends GridPanel {
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 8, 0, 0, 6, 4, Task.TASK_TEXT,
                 false, true);
-        /*// добавление вручную
-        Label xLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 4, 0, 2, 1, 1, "X", true, true);
-        labels.add(xLabel);
-        Input xField = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 4, 1, 2, 2, 1, "0.0", true,
-                FIELD_TEXT_COLOR, true);
-        inputs.add(xField);
-        Label yLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 4, 3, 2, 1, 1, "Y", true, true);
-        labels.add(yLabel);
-        Input yField = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 4, 4, 2, 2, 1, "0.0", true,
-                FIELD_TEXT_COLOR, true);
-        inputs.add(yField);*/
-        buttons = new ArrayList<>();
-        /*Button addToFirstSet = new Button(
-                window, false, backgroundColor, PANEL_PADDING,
-                6, 7, 0, 3, 6, 1, "Добавить в множество",
-                true, true);
-        addToFirstSet.setOnClick(() -> {
-            // если числа введены верно
-            if (!xField.hasValidDoubleValue()) {
-                PanelLog.warning("X координата введена неверно");
-            } else if (!yField.hasValidDoubleValue())
-                PanelLog.warning("Y координата введена неверно");
-            else
-                PanelRendering.task.addPoint(
-                        new Vector2d(xField.doubleValue(), yField.doubleValue())
-                );
-        });
-        buttons.add(addToFirstSet);*/
 
         // случайное добавление
         Label cntLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
@@ -132,31 +100,6 @@ public class PanelControl extends GridPanel {
                 true, true);
         save.setOnClick(PanelRendering::save);
         buttons.add(save);
-        /*Button clear = new Button(
-                window, false, backgroundColor, PANEL_PADDING,
-                6, 10, 0, 8, 3, 1, "Очистить",
-                true, true);
-        clear.setOnClick(() -> PanelRendering.task.clear());
-        buttons.add(clear);
-        solve = new Button(
-                window, false, backgroundColor, PANEL_PADDING,
-                6, 10, 3, 8, 3, 1, "Решить",
-                true, true);
-        solve.setOnClick(() -> {
-            if (!PanelRendering.task.isSolved()) {
-                PanelRendering.task.solve();
-                String s = "Задача решена\n" +
-                        "Пересечений: " + PanelRendering.task.getCrossed().size() / 2 + "\n" +
-                        "Отдельных точек: " + PanelRendering.task.getSingle().size();
-
-                PanelInfo.show(s + "\n\nНажмите Esc, чтобы вернуться");
-                PanelLog.success(s);
-                solve.text = "Сбросить";
-            } else {
-                cancelTask();
-            }
-            window.requestFrame();
-        });*/
     }
     /**
      * Обработчик событий
