@@ -53,12 +53,13 @@ public class Task {
      * Список линий
      */
     @Getter
+    @JsonIgnore
     private final ArrayList<Line> lines;
     /**
      * Список точек выделенных
      */
     @Getter
-    @JsonIgnore
+    //@JsonIgnore
     private final ArrayList<Point> selected;
     /**
      * Список точек выживших
@@ -84,9 +85,6 @@ public class Task {
     @Getter
     @JsonIgnore
     private final ArrayList<Point> dist;
-    /*@Getter
-    @JsonIgnore
-    private final ArrayList<Point> single; (точки в разности)*/
     /**
      * Размер точки
      */
@@ -113,31 +111,22 @@ public class Task {
      *
      * @param ownCS  СК задачи
      * @param points массив точек
+     *
      */
     @JsonCreator
     public Task(
             @JsonProperty("ownCS") CoordinateSystem2d ownCS,
-            @JsonProperty("points") ArrayList<Point> points
+            @JsonProperty("points") ArrayList<Point> points,
+            @JsonProperty("selected") ArrayList<Point> selected
     ) {
         this.ownCS = ownCS;
         this.points = points;
-        this.selected = new ArrayList<>();
+        this.selected = selected;
         this.survived = new ArrayList<>();
         this.lines = new ArrayList<>();
         this.distSurv = new ArrayList<>();
         this.minDist = new ArrayList<>();
         this.dist = new ArrayList<>();
-
-        /*this.lines.add(new Line(
-                new Point(new Vector2d(0.5, 0.7)),
-                new Point(new Vector2d(-0.7, 0.5))
-        ));
-
-        this.lines.add(new Line(
-                new Point(new Vector2d(0.5, 0.7)),
-                new Point(new Vector2d(0.7, 0.5))
-        ));*/
-        //this.single = new ArrayList<>();
     }
 
     /**
@@ -189,12 +178,15 @@ public class Task {
         solved = false;
         Point newPoint = new Point(pos);
         for (Point p: points) {
-            if (Math.abs(newPoint.pos.x-p.pos.x)<=0.2 && Math.abs(newPoint.pos.y-p.pos.y)<=0.2) {
+            if (Math.abs(newPoint.pos.x-p.pos.x)<=0.2 && Math.abs(newPoint.pos.y-p.pos.y)<=0.2||(selected.size()>=2)) {
                 if (!selected.contains(p) && selectedPointsCounter<2) {
                     selectedPointsCounter++;
-                    selected.add(p);
-                    // Добавляем в лог запись информации
-                    PanelLog.info(selectedPointsCounter + "ая точка " + p + " выбрана");
+                    if (selected.size()<2) {
+                        selected.add(p);
+                        // Добавляем в лог запись информации
+                        PanelLog.info(selectedPointsCounter + "ая точка " + p + " выбрана");
+                    }
+
                     if (selectedPointsCounter==2) {this.lines.add(new Line(
                             selected.get(0),
                             selected.get(1)
@@ -259,7 +251,6 @@ public class Task {
                                         ey1*d*(x12-x11)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+y2
                                 ));
                                 if (Math.abs(a*w2.pos.x+b*w2.pos.y+c)<=0.5){
-                                    System.out.println("w2 на красной");
                                     //нарисуем максимальную дистанцию
                                     this.lines.add(new Line(w1, w2));
                                     i=j=2; //break
@@ -380,36 +371,6 @@ public class Task {
         points.clear();
         solved = false;
     }
-    /**
-     * Решить задачу
-     */
-  /*public void solve() {
-        // очищаем списки
-        added.clear();
-        //single.clear();
-
-        // перебираем пары точек
-        for (int i = 0; i < points.size(); i++) {
-            for (int j = i + 1; j < points.size(); j++) {
-                // сохраняем точки
-                Point a = points.get(i);
-                Point b = points.get(j);
-                // если точки совпадают по положению
-                if (a.pos.equals(b.pos)) {
-                    if (!crossed.contains(a)) {
-                        crossed.add(a);
-                        crossed.add(b);
-                    }
-                }
-            }
-        }
-
-        /// добавляем вс
-        for (Point point : points)
-            if (!crossed.contains(point))
-                single.add(point);
-        solved = true;
-    }*/
 
     /**
      * Отмена решения задачи
@@ -417,9 +378,6 @@ public class Task {
     public void cancel() {
         solved = false;
     }
-    /*public boolean isSolved() { (проверка, решена ли задача
-        return solved;
-    }*/
 
     /**
      * Рисование сетки

@@ -55,9 +55,6 @@ public class Colors {
      * Цвет коридора
      */
     public static final int CORR_COLOR = Misc.getColor(200, 150, 150, 150);
-    /*private Colors() {
-        throw new AssertionError("Вызов этого конструктора запрещён"); (запрещённый конструктор)
-    }*/
     /**
      * Цвет заливки панели
      */
@@ -70,7 +67,6 @@ public class Colors {
      * Цвет подложки
      */
     public static final int STATS_BACKGROUND_COLOR = Misc.getColor(64, 51, 200, 51);
-    //public static final int STATS_COLOR = Misc.getColor(255, 51, 200, 51); (цвет подложки)
     /**
      * Цвет текста
      */

@@ -32,10 +32,6 @@ public class PanelControl extends GridPanel {
      * Кнопки
      */
     public List<Button> buttons;
-    /**
-     * Кнопка "решить"
-     */
-    private final Button solve;
 
     /**
      * Панель управления
@@ -128,7 +124,6 @@ public class PanelControl extends GridPanel {
                 true, true);
         load.setOnClick(() -> {
             PanelRendering.load();
-            cancelTask();
         });
         buttons.add(load);
         Button save = new Button(
@@ -137,7 +132,7 @@ public class PanelControl extends GridPanel {
                 true, true);
         save.setOnClick(PanelRendering::save);
         buttons.add(save);
-        Button clear = new Button(
+        /*Button clear = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 10, 0, 8, 3, 1, "Очистить",
                 true, true);
@@ -148,7 +143,7 @@ public class PanelControl extends GridPanel {
                 6, 10, 3, 8, 3, 1, "Решить",
                 true, true);
         solve.setOnClick(() -> {
-            /*if (!PanelRendering.task.isSolved()) {
+            if (!PanelRendering.task.isSolved()) {
                 PanelRendering.task.solve();
                 String s = "Задача решена\n" +
                         "Пересечений: " + PanelRendering.task.getCrossed().size() / 2 + "\n" +
@@ -159,10 +154,9 @@ public class PanelControl extends GridPanel {
                 solve.text = "Сбросить";
             } else {
                 cancelTask();
-            }*/
+            }
             window.requestFrame();
-        });
-        buttons.add(solve);
+        });*/
     }
     /**
      * Обработчик событий
@@ -241,13 +235,5 @@ public class PanelControl extends GridPanel {
         for (Label label : labels) {
             label.paint(canvas, windowCS);
         }
-    }
-    /**
-     * Сброс решения задачи
-     */
-    private void cancelTask() {
-        PanelRendering.task.cancel();
-        // Задаём новый текст кнопке решения
-        solve.text = "Решить";
     }
 }

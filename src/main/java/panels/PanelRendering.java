@@ -54,7 +54,7 @@ public class PanelRendering extends GridPanel {
                 new Vector2d(-10.0, -10.0), new Vector2d(10.0, 10.0)
         );
         // создаём задачу без точек
-        task = new Task(cs, new ArrayList<>());
+        task = new Task(cs, new ArrayList<>(), new ArrayList<>());
         // добавляем в неё cnt случайных точек
         task.addRandomPoints(0);
         fpsStats = new Stats();
