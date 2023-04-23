@@ -62,7 +62,7 @@ public class PanelControl extends GridPanel {
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 8, 0, 0, 6, 4, Task.TASK_TEXT,
                 false, true);
-
+        buttons = new ArrayList<>();
         // случайное добавление
         Label cntLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
                 6, 6, 0, 4, 1, 1, "Кол-во", true, true);

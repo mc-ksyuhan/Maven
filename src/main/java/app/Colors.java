@@ -13,11 +13,11 @@ public class Colors {
     /**
      * Цвет подложки панелей
      */
-    public static final int PANEL_BACKGROUND_COLOR = Misc.getColor(32, 0, 0, 0);
+    public static final int PANEL_BACKGROUND_COLOR = Misc.getColor(30, 0, 0, 0);
     /**
      * Цвет фона
      */
-    public static final int APP_BACKGROUND_COLOR = Misc.getColor(255, 38, 70, 83);
+    public static final int APP_BACKGROUND_COLOR = Misc.getColor(255, 40, 70, 85);
     /**
      * Цвет подложки поля ввода
      */
@@ -26,7 +26,7 @@ public class Colors {
      * Цвет текста
      */
     public static final int FIELD_TEXT_COLOR = Misc.getColor(255, 0, 0, 0);
-    public static final int MULTILINE_TEXT_COLOR = Misc.getColor(64, 255, 255, 255);
+    public static final int MULTILINE_TEXT_COLOR = Misc.getColor(65, 255, 255, 255);
     /**
      * Цвет кнопки
      */
@@ -55,10 +55,11 @@ public class Colors {
      * Цвет коридора
      */
     public static final int CORR_COLOR = Misc.getColor(200, 150, 150, 150);
+
     /**
      * Цвет заливки панели
      */
-    public static final int DIALOG_BACKGROUND_COLOR = Misc.getColor(230, 70, 38, 83);
+    public static final int DIALOG_BACKGROUND_COLOR = Misc.getColor(230, 70, 40, 85);
     /**
      * Цвет сетки
      */
@@ -66,7 +67,7 @@ public class Colors {
     /**
      * Цвет подложки
      */
-    public static final int STATS_BACKGROUND_COLOR = Misc.getColor(64, 51, 200, 51);
+    public static final int STATS_BACKGROUND_COLOR = Misc.getColor(65, 50, 200, 50);
     /**
      * Цвет текста
      */
@@ -82,9 +83,9 @@ public class Colors {
     /**
      * Цвет заливки панели
      */
-    public static final int SCROLLER_BACKGROUND_COLOR = Misc.getColor(150, 83, 38, 70);
+    public static final int SCROLLER_BACKGROUND_COLOR = Misc.getColor(150, 85, 40, 70);
     /**
      * Цвет заливки панели
      */
-    public static final int SCROLLER_COLOR = Misc.getColor(255, 83, 38, 70);
+    public static final int SCROLLER_COLOR = Misc.getColor(255, 85, 40, 70);
 }
