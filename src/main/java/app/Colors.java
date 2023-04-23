@@ -44,9 +44,14 @@ public class Colors {
      */
     public static final int MINDIST_COLOR = Misc.getColor(200, 255, 0, 0);
     /**
+     * Цвет точек, расположенных на дистанции
+     */
+    public static final int DIST_COLOR = Misc.getColor(200, 255, 0, 255);
+    /**
      * Цвет макс.дист. точки и макс.дист
      */
     public static final int MAXDIST_COLOR = Misc.getColor(200, 0, 200, 0);
+
 
     /*private Colors() {
         throw new AssertionError("Вызов этого конструктора запрещён"); (запрещённый конструктор)

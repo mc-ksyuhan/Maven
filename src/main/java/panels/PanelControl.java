@@ -9,6 +9,8 @@ import misc.CoordinateSystem2i;
 import misc.Vector2i;
 import java.util.List;
 import static app.Application.PANEL_PADDING;
+import static app.Colors.FIELD_BACKGROUND_COLOR;
+import static app.Colors.FIELD_TEXT_COLOR;
 
 /**
  * Панель управления
@@ -95,7 +97,7 @@ public class PanelControl extends GridPanel {
                         new Vector2d(xField.doubleValue(), yField.doubleValue())
                 );
         });
-        buttons.add(addToFirstSet);
+        buttons.add(addToFirstSet);*/
 
         // случайное добавление
         Label cntLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
@@ -105,9 +107,9 @@ public class PanelControl extends GridPanel {
         Input cntField = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
                 6, 6, 1, 4, 2, 1, "5", true,
                 FIELD_TEXT_COLOR, true);
-        inputs.add(cntField);*/
+        inputs.add(cntField);
 
-        /*Button addPoints = new Button(
+        Button addPoints = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 6, 3, 4, 3, 1, "Добавить\nслучайные точки",
                 true, true);
@@ -118,7 +120,7 @@ public class PanelControl extends GridPanel {
             } else
                 PanelRendering.task.addRandomPoints(cntField.intValue());
         });
-        buttons.add(addPoints);*/
+        buttons.add(addPoints);
         // управление
         Button load = new Button(
                 window, false, backgroundColor, PANEL_PADDING,

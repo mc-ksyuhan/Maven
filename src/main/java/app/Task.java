@@ -78,6 +78,12 @@ public class Task {
     @Getter
     @JsonIgnore
     private final ArrayList<Point> minDist;
+    /**
+     * Список точек на дистанции(которые не в minDist и не на макс. дистанции)
+     */
+    @Getter
+    @JsonIgnore
+    private final ArrayList<Point> dist;
     /*@Getter
     @JsonIgnore
     private final ArrayList<Point> single; (точки в разности)*/
@@ -120,6 +126,7 @@ public class Task {
         this.lines = new ArrayList<>();
         this.distSurv = new ArrayList<>();
         this.minDist = new ArrayList<>();
+        this.dist = new ArrayList<>();
 
         /*this.lines.add(new Line(
                 new Point(new Vector2d(0.5, 0.7)),
@@ -191,8 +198,8 @@ public class Task {
                     if (selectedPointsCounter==2) {this.lines.add(new Line(
                             selected.get(0),
                             selected.get(1)
-                        ));
-                    //создаём массив выживших точек
+                    ));
+                        //создаём массив выживших точек
                         for (Point s: points) {
                             if (!selected.contains(s)) survived.add(s);
                         }
@@ -208,17 +215,24 @@ public class Task {
                         }
                         for (Point u:survived){
                             Line l = lines.get(0);
-                                if (l.getDistance(u)==distSurv.get(0) || l.getDistance(u)==distSurv.get(1))    {
-                                    minDist.add(u);
-                                }
+                            if (l.getDistance(u)==distSurv.get(0) || l.getDistance(u)==distSurv.get(1))    {
+                                minDist.add(u);
+                            }
+                        }
+                        //точки на дистанции
+                        for (Point u:survived){
+                            Line l = lines.get(0);
+                            if (l.getDistance(u)>=distSurv.get(2) && l.getDistance(u)<distSurv.get(distSurv.size()/2))    {
+                                dist.add(u);
+                            }
                         }
                         //нарисуем вторую линию по точкам с мин. дистанциями
-                            this.lines.add(new Line(
-                                    minDist.get(0),
-                                    minDist.get(1)
-                            ));
+                        this.lines.add(new Line(
+                                minDist.get(0),
+                                minDist.get(1)
+                        ));
                         // w2 проекция w1 на вторую прямую
-                        Point w1 = findPoint();
+                        Point w1 = findPoint(); //зелёная точка
                         Line l2 = lines.get(1);
                         double d = l2.getDistance(w1);
                         double x11 = l2.pointA.pos.x;
@@ -301,8 +315,10 @@ public class Task {
         points.clear();
         solved = false;
     }
-
-   /*public void solve() { (решение задачи)
+    /**
+     * Решить задачу
+     */
+  /*public void solve() {
         // очищаем списки
         added.clear();
         //single.clear();
@@ -392,8 +408,9 @@ public class Task {
                     paint.setColor(MINDIST_COLOR);
                 } else if (p == findPoint()) {
                     paint.setColor(MAXDIST_COLOR);
-                }
-                else {paint.setColor(p.getColor());}
+                } else if (dist.contains(p)) {
+                    paint.setColor(DIST_COLOR);
+                } else {paint.setColor(p.getColor());}
                 // y-координату разворачиваем, потому что у СК окна ось y направлена вниз, а в классическом представлении - вверх
                 Vector2i windowPos = windowCS.getCoords(p.pos.x, p.pos.y, ownCS);
                 // рисуем точку
@@ -402,7 +419,7 @@ public class Task {
             paint.setColor(SELECTL_COLOR);
             for (Line l : lines) {
                 if (l==lines.get(0)) {
-                        paint.setColor(SELECTL_COLOR);
+                    paint.setColor(SELECTL_COLOR);
                 } else if (l==lines.get(1)){
                     paint.setColor(MINDIST_COLOR);
                 } else if (l==lines.get(2)) {
@@ -420,7 +437,8 @@ public class Task {
                 Vector2i renderPointA = Vector2i.sum(pointA, Vector2i.mult(delta, maxDistance));
                 Vector2i renderPointB = Vector2i.sum(pointA, Vector2i.mult(delta, -maxDistance));
                 // рисуем линию
-                canvas.drawLine(renderPointA.x, renderPointA.y, renderPointB.x, renderPointB.y, paint);
+                if (l==lines.get(2)) canvas.drawLine(pointA.x, pointA.y, pointB.x, pointB.y, paint);
+                else canvas.drawLine(renderPointA.x, renderPointA.y, renderPointB.x, renderPointB.y, paint);
                 ///выведем d на экран
                 /*Point C = new Point(new Vector2d(5.6, 1.4));
                 double d = l.getDistance(C);

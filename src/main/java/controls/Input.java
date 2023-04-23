@@ -166,8 +166,14 @@ public class Input extends GridPanel {
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-    public int intValue() { (получить вещественное значение из поля ввода,@return возвращает значение, если всё ок, в противном случае вернёт 0)
+    }*/
+
+    /**
+     * Получить вещественное значение из поля ввода
+     * @return
+     * возвращает значение, если всё ок, в противном случае вернёт 0
+     */
+    public int intValue() {
         try {
             // для правильной конвертации, если нужно, заменяем плавающую запятую
             // на плавающую точку
@@ -177,7 +183,12 @@ public class Input extends GridPanel {
         }
         return 0;
     }
-    public boolean hasValidIntValue() { (проверяет, лежит ли в поле ввода правильное вещественное число)
+
+    /**
+     * Проверяет, лежит ли в поле ввода правильное целое число
+     * @return
+     */
+    public boolean hasValidIntValue() {
         try {
             // для правильной конвертации, если нужно, заменяем плавающую запятую
             // на плавающую точку
@@ -186,7 +197,7 @@ public class Input extends GridPanel {
         } catch (NumberFormatException e) {
             return false;
         }
-    }*/
+    }
 
     /**
      * Задать текст
