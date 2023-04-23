@@ -105,7 +105,7 @@ public class PanelControl extends GridPanel {
         labels.add(cntLabel);
 
         Input cntField = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 6, 1, 4, 2, 1, "5", true,
+                6, 6, 1, 4, 2, 1, "20", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(cntField);
 

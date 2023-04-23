@@ -51,8 +51,10 @@ public class Colors {
      * Цвет макс.дист. точки и макс.дист
      */
     public static final int MAXDIST_COLOR = Misc.getColor(200, 0, 200, 0);
-
-
+    /**
+     * Цвет коридора
+     */
+    public static final int CORR_COLOR = Misc.getColor(200, 150, 150, 150);
     /*private Colors() {
         throw new AssertionError("Вызов этого конструктора запрещён"); (запрещённый конструктор)
     }*/

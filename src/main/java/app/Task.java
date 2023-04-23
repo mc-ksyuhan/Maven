@@ -241,12 +241,77 @@ public class Task {
                         double y12 = l2.pointB.pos.y;
                         double x2 = w1.pos.x;
                         double y2 = w1.pos.y;
-                        Point w2 = new Point (new Vector2d(
-                                d*(y11-y12)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+x2,
-                                d*(x12-x11)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+y2
+                        double ex1 = -1;
+                        double ey1 = -1;
+                        double a = y12-y11;
+                        if (a==0) a=0.000001;
+                        double b = x11-x12;
+                        if (b==0) b=0.000001;
+                        double c = y11*x12-y12*x11;
+                        Point w2 = new Point(new Vector2d(0,0));
+
+                        for (int i = 0; i < 2; i++) {
+                            ex1=-ex1;
+                            for (int j = 0; j < 2; j++) {
+                                ey1=-ey1;
+                                 w2 = new Point(new Vector2d(
+                                        ex1*d*(y11-y12)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+x2,
+                                        ey1*d*(x12-x11)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+y2
+                                ));
+                                if (Math.abs(a*w2.pos.x+b*w2.pos.y+c)<=0.5){
+                                    System.out.println("w2 на красной");
+                                    //нарисуем максимальную дистанцию
+                                    this.lines.add(new Line(w1, w2));
+                                    i=j=2; //break
+                                }
+                            }
+                        }
+                        //w3 точка симметричная отн-но найденной прямой
+                        Point w3 = new Point(new Vector2d(
+                                w1.pos.x+2*(w2.pos.x-w1.pos.x),
+                                w1.pos.y+2*(w2.pos.y-w1.pos.y)
+
                         ));
-                        //нарисуем максимальную дистанцию
-                        this.lines.add(new Line(w1, w2));
+                        //this.lines.add(new Line(w2, w3));
+                        double c2 = -x2*a-y2*b;
+                        double xw12=0;
+                        double yw12=0;
+                        if (a==0.000001) {
+                            xw12=w1.pos.x+1;
+                            yw12=w1.pos.y;
+                        } else if (b==0.000001) {
+                            xw12=w1.pos.x;
+                            yw12=w1.pos.y+1;
+                        } else {
+                            xw12=w1.pos.x+1;
+                            yw12=-c2/b-a*xw12/b;
+                        }
+
+                        Point w12 = new Point(new Vector2d(
+                                xw12,
+                                yw12
+                        ));
+                        this.lines.add(new Line(w1, w12));
+
+                        double c3 = -w3.pos.x*a-w3.pos.y*b;
+                        double xw32=0;
+                        double yw32=0;
+                        if (a==0.000001) {
+                            xw32=w3.pos.x+1;
+                            yw32=w3.pos.y;
+                        } else if (b==0.000001) {
+                            xw32=w3.pos.x;
+                            yw32=w3.pos.y+1;
+                        } else {
+                            xw32=w3.pos.x+1;
+                            yw32=-c3/b-a*xw32/b;
+                        }
+
+                        Point w32 = new Point(new Vector2d(
+                                xw32,
+                                yw32
+                        ));
+                        this.lines.add(new Line(w3, w32));
                     }
                 }
             }
@@ -424,6 +489,8 @@ public class Task {
                     paint.setColor(MINDIST_COLOR);
                 } else if (l==lines.get(2)) {
                     paint.setColor(MAXDIST_COLOR);
+                } else if (l==lines.get(3)||l==lines.get(4)) {
+                    paint.setColor(CORR_COLOR);
                 } else {paint.setColor(POINT_COLOR);}
                 // опорные точки линии
                 Vector2i pointA = windowCS.getCoords(l.pointA.pos, ownCS);
