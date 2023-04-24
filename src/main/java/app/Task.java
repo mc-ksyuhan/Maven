@@ -334,7 +334,7 @@ public class Task {
     }
 
     /**
-     * Клик мыши по точке на экране
+     * Клик мыши по пространству задачи
      *
      * @param pos         положение мыши
      * @param mouseButton кнопка мыши
@@ -343,8 +343,10 @@ public class Task {
         if (lastWindowCS == null) return;
         // получаем положение на экране
         Vector2d taskPos = ownCS.getCoords(pos, lastWindowCS);
-        // если левая кнопка мыши, добавляем в множество
         if (mouseButton.equals(MouseButton.PRIMARY)) {
+            addPoint(taskPos);
+            // если правая, то во второе
+        } else if (mouseButton.equals(MouseButton.SECONDARY)) {
             selectPoint(taskPos);
         }
     }
