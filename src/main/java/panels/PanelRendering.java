@@ -103,6 +103,18 @@ public class PanelRendering extends GridPanel {
         }
     }
     /**
+     * Загрузить файл
+     */
+    public static void load() {
+        PanelSelectFile.show("Выберите файл", s -> {
+                    if (!s.isEmpty()) {
+                        PanelLog.info("load from " + s);
+                        loadFromFile(s);
+                    }
+                }
+        );
+    }
+    /**
      * Загружаем из файла
      *
      * @param path путь к файлу
@@ -133,17 +145,5 @@ public class PanelRendering extends GridPanel {
                 }
             }
         });
-    }
-    /**
-     * Загрузить файл
-     */
-    public static void load() {
-        PanelSelectFile.show("Выберите файл", s -> {
-            if (!s.isEmpty()) {
-                PanelLog.info("load from " + s);
-                loadFromFile(s);
-            }
-        }
-        );
     }
 }

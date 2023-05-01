@@ -9,7 +9,8 @@ public class Line {
     public Line(Point pointA, Point pointB) {
         this.pointA = pointA;
         this.pointB = pointB;
-
+        System.out.println(pointA.pos.x + " " + pointA.pos.y);
+        System.out.println(pointB.pos.x + " " + pointB.pos.y);
     }
 
     public double getDistance(Point pointC){

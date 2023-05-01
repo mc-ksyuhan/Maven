@@ -86,6 +86,12 @@ public class Task {
     @JsonIgnore
     private final ArrayList<Point> dist;
     /**
+     * Список точек для рисования макс.дист и коридора
+     */
+    @Getter
+    @JsonIgnore
+    private final ArrayList<Point> wlist;
+    /**
      * Размер точки
      */
     private static final int POINT_SIZE = 3;
@@ -119,6 +125,15 @@ public class Task {
             @JsonProperty("points") ArrayList<Point> points,
             @JsonProperty("selected") ArrayList<Point> selected
     ) {
+        points.add(new Point(new Vector2d(1, 1)));
+        points.add(new Point(new Vector2d(-1, 1)));
+        points.add(new Point(new Vector2d(-5, 1)));
+        points.add(new Point(new Vector2d(2, 1)));
+        points.add(new Point(new Vector2d(1, 2)));
+        points.add(new Point(new Vector2d(2, 2)));
+
+        selected.add(new Point(new Vector2d(1, 2)));
+        selected.add(new Point(new Vector2d(-1, 1)));
         this.ownCS = ownCS;
         this.points = points;
         this.selected = selected;
@@ -127,6 +142,8 @@ public class Task {
         this.distSurv = new ArrayList<>();
         this.minDist = new ArrayList<>();
         this.dist = new ArrayList<>();
+        this.wlist = new ArrayList<>();
+
     }
 
     /**
@@ -250,6 +267,9 @@ public class Task {
                 w1.pos.y+2*(w2.pos.y-w1.pos.y)
 
         ));
+        this.wlist.add(w1);
+        this.wlist.add(w2);
+        this.wlist.add(w3);
         //this.lines.add(new Line(w2, w3));
         double c2 = -x2*a-y2*b;
         double xw12=0;
@@ -380,6 +400,12 @@ public class Task {
      */
     public void clear() {
         points.clear();
+        lines.clear();
+        survived.clear();
+        selected.clear();
+        minDist.clear();
+        distSurv.clear();
+        dist.clear();
         solved = false;
     }
 

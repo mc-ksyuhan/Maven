@@ -6,6 +6,7 @@ import controls.*;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.skija.Canvas;
 import misc.CoordinateSystem2i;
+import misc.Vector2d;
 import misc.Vector2i;
 import java.util.List;
 import static app.Application.PANEL_PADDING;
@@ -62,7 +63,41 @@ public class PanelControl extends GridPanel {
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 8, 0, 0, 6, 4, Task.TASK_TEXT,
                 false, true);
+        // добавление вручную
+        Label xLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
+                6, 4, 0, 2, 1, 1, "X", true, true);
+        labels.add(xLabel);
+        Input xField = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
+                6, 4, 1, 2, 2, 1, "0.0", true,
+                FIELD_TEXT_COLOR, true);
+        inputs.add(xField);
+        Label yLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
+                6, 4, 3, 2, 1, 1, "Y", true, true);
+        labels.add(yLabel);
+        Input yField = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
+                6, 4, 4, 2, 2, 1, "0.0", true,
+                FIELD_TEXT_COLOR, true);
+        inputs.add(yField);
+
         buttons = new ArrayList<>();
+
+        Button addToFirstSet = new Button(
+                window, false, backgroundColor, PANEL_PADDING,
+                6, 7, 0, 3, 6, 1, "Добавить в множество",
+                true, true);
+        addToFirstSet.setOnClick(() -> {
+            // если числа введены верно
+            if (!xField.hasValidDoubleValue()) {
+                PanelLog.warning("X координата введена неверно");
+            } else if (!yField.hasValidDoubleValue())
+                PanelLog.warning("Y координата введена неверно");
+            else
+                PanelRendering.task.addPoint(
+                        new Vector2d(xField.doubleValue(), yField.doubleValue())
+                );
+        });
+        buttons.add(addToFirstSet);
+
         // случайное добавление
         Label cntLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
                 6, 6, 0, 4, 1, 1, "Кол-во", true, true);
@@ -94,12 +129,20 @@ public class PanelControl extends GridPanel {
             PanelRendering.load();
         });
         buttons.add(load);
+
         Button save = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 8, 3, 7, 3, 1, "Сохранить",
                 true, true);
         save.setOnClick(PanelRendering::save);
         buttons.add(save);
+
+        Button clear = new Button(
+                window, false, backgroundColor, PANEL_PADDING,
+                6, 10, 2, 8, 3, 1, "Очистить",
+                true, true);
+        clear.setOnClick(() -> PanelRendering.task.clear());
+        buttons.add(clear);
     }
     /**
      * Обработчик событий

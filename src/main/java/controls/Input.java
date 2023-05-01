@@ -147,12 +147,40 @@ public class Input extends GridPanel {
             }
         }
     }
-
     /**
      * Получить вещественное значение из поля ввода
-     * @return
-     * возвращает значение, если всё ок, в противном случае вернёт 0
+     *
+     * @return возвращает значение
+     * если всё ок, в противном случае вернёт 0
      */
+    public double doubleValue() {
+            try {
+                // для правильной конвертации, если нужно, заменяем плавающую запятую
+                // на плавающую точку
+                return Double.parseDouble(text.replace(",", "."));
+            } catch (NumberFormatException e) {
+                System.out.println("ошибка преобразования");
+            }
+            return 0;
+        }
+    /**
+     * Проверяет, лежит ли в поле ввода правильное вещественное число
+     */
+        public boolean hasValidDoubleValue() {
+            try {
+                // для правильной конвертации, если нужно, заменяем плавающую запятую
+                // на плавающую точку
+                Double.parseDouble(text.replace(",", "."));
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+        /**
+         * Получить вещественное значение из поля ввода
+         * @return
+         * возвращает значение, если всё ок, в противном случае вернёт 0
+         */
     public int intValue() {
         try {
             // для правильной конвертации, если нужно, заменяем плавающую запятую
