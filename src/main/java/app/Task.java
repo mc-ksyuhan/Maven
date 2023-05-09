@@ -124,15 +124,7 @@ public class Task {
             @JsonProperty("ownCS") CoordinateSystem2d ownCS,
             @JsonProperty("points") ArrayList<Point> points,
             @JsonProperty("selected") ArrayList<Point> selected
-    ) {points.add(new Point(new Vector2d(5, 3)));
-        points.add(new Point(new Vector2d(-1, 2)));
-        points.add(new Point(new Vector2d(-5, 1)));
-        points.add(new Point(new Vector2d(7, 0)));
-        points.add(new Point(new Vector2d(-7, 1)));
-        points.add(new Point(new Vector2d(3, 9)));
-        points.add(new Point(new Vector2d(15, 8)));
-        selected.add(new Point(new Vector2d(-1, 2)));
-        selected.add(new Point(new Vector2d(-7, 1)));
+    ) {
         this.ownCS = ownCS;
         this.points = points;
         this.selected = selected;
@@ -142,7 +134,6 @@ public class Task {
         this.minDist = new ArrayList<>();
         this.dist = new ArrayList<>();
         this.wlist = new ArrayList<>();
-
     }
 
     /**
