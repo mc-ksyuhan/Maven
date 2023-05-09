@@ -21,7 +21,9 @@ public class Line {
         double xC = pointC.pos.x;
         double yC = pointC.pos.y;
         double a = yB-yA;
+        if (a==0) a=0.0000000000001;
         double b = xA-xB;
+        if (b==0) b=0.0000000000001;
         double c = yA*xB-yB*xA;
         double d = Math.abs(a*xC+b*yC+c)/Math.sqrt(a*a+b*b);
         return d;

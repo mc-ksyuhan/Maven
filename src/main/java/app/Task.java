@@ -124,16 +124,15 @@ public class Task {
             @JsonProperty("ownCS") CoordinateSystem2d ownCS,
             @JsonProperty("points") ArrayList<Point> points,
             @JsonProperty("selected") ArrayList<Point> selected
-    ) {
-        points.add(new Point(new Vector2d(1, 1)));
-        points.add(new Point(new Vector2d(-1, 1)));
+    ) {points.add(new Point(new Vector2d(5, 3)));
+        points.add(new Point(new Vector2d(-1, 2)));
         points.add(new Point(new Vector2d(-5, 1)));
-        points.add(new Point(new Vector2d(2, 1)));
-        points.add(new Point(new Vector2d(1, 2)));
-        points.add(new Point(new Vector2d(2, 2)));
-
-        selected.add(new Point(new Vector2d(1, 2)));
-        selected.add(new Point(new Vector2d(-1, 1)));
+        points.add(new Point(new Vector2d(7, 0)));
+        points.add(new Point(new Vector2d(-7, 1)));
+        points.add(new Point(new Vector2d(3, 9)));
+        points.add(new Point(new Vector2d(15, 8)));
+        selected.add(new Point(new Vector2d(-1, 2)));
+        selected.add(new Point(new Vector2d(-7, 1)));
         this.ownCS = ownCS;
         this.points = points;
         this.selected = selected;
@@ -251,8 +250,8 @@ public class Task {
             for (int j = 0; j < 2; j++) {
                 ey1=-ey1;
                 w2 = new Point(new Vector2d(
-                        ex1*d*(y11-y12)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+x2,
-                        ey1*d*(x12-x11)/Math.sqrt((y11-y12)*(y11-y12)+(x11-x12)*(x11-x12))+y2
+                        ex1*d*(y11-y12)/Math.sqrt(a*a+b*b)+x2,
+                        ey1*d*(x12-x11)/Math.sqrt(a*a+b*b)+y2
                 ));
                 if (Math.abs(a*w2.pos.x+b*w2.pos.y+c)<=0.5){
                     //нарисуем максимальную дистанцию
@@ -272,6 +271,7 @@ public class Task {
         this.wlist.add(w3);
         //this.lines.add(new Line(w2, w3));
         double c2 = -x2*a-y2*b;
+        //рандомная точка для первой линии коридора
         double xw12=0;
         double yw12=0;
         if (a==0.000001) {
@@ -292,6 +292,7 @@ public class Task {
         this.lines.add(new Line(w1, w12));
 
         double c3 = -w3.pos.x*a-w3.pos.y*b;
+        //рандомная точка для второй линии коридора
         double xw32=0;
         double yw32=0;
         if (a==0.000001) {
