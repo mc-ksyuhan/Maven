@@ -119,24 +119,23 @@ public class UnitTest {
     @Test
     public void test3() {
         ArrayList<Point> points = new ArrayList<>();
-        points.add(new Point(new Vector2d(5, 3)));
-        points.add(new Point(new Vector2d(-1, 2)));
-        points.add(new Point(new Vector2d(-5, 1)));
-        points.add(new Point(new Vector2d(7, 0)));
-        points.add(new Point(new Vector2d(-7, 1)));
-        points.add(new Point(new Vector2d(3, 9)));
-        points.add(new Point(new Vector2d(15, 8)));
+        points.add(new Point(new Vector2d(1, 1)));
+        points.add(new Point(new Vector2d(-1, 1)));
+        points.add(new Point(new Vector2d(-5, 2)));
+        points.add(new Point(new Vector2d(2, 1)));
+        points.add(new Point(new Vector2d(1, 2)));
+        points.add(new Point(new Vector2d(2, 2)));
 
         ArrayList<Point> selected = new ArrayList<>();
-        selected.add(new Point(new Vector2d(-1, 2)));
-        selected.add(new Point(new Vector2d(-7, 1)));
+        selected.add(new Point(new Vector2d(1, 2)));
+        selected.add(new Point(new Vector2d(-5, 2)));
 
         ArrayList<Line> lines = new ArrayList<>();
         lines.add(new Line(selected.get(0),selected.get(1))); //добавляем первую прямую
-        lines.add(new Line(new Point(new Vector2d(5, 3)), //крА
-                new Point(new Vector2d(-5, 1)))); //крВ
-        lines.add(new Line(new Point(new Vector2d(7, 0)), //зел
-                new Point(new Vector2d(6.3, 3.2)))); //проекция зел
+        lines.add(new Line(new Point(new Vector2d(2, 1)), //крА
+                new Point(new Vector2d(2, 2)))); //крВ
+        lines.add(new Line(new Point(new Vector2d(1, 1)), //зел
+                new Point(new Vector2d(2, 1)))); //проекция зел
         /*5.0 3.0 //крА
         -5.0 1.0 //крВ
         7.0 0.0 //зел
